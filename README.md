@@ -14,4 +14,4 @@ This project is about image classification. More specifically, the aim is to ide
 
 ## Dataset
 
-This dataset used comes from Kaggle website. It is available here : [Cat Breeds Dataset](https://www.kaggle.com/datasets/ma7555/cat-breeds-dataset).
+This dataset used comes from Kaggle website. It is available here : [Cat Breeds Refined Dataset](https://www.kaggle.com/datasets/doctrinek/catbreedsrefined-7k).
