@@ -2,7 +2,7 @@
 
 ![image](illustrations/cat_banner_readme.avif)
 
-## Tables of content
+## Table of contents
 
 - [Summary](#summary)
 - [Dataset](#dataset)
