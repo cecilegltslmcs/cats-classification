@@ -1,2 +1,3 @@
 data/
 myenv/
+.pre-commit-config.yaml
