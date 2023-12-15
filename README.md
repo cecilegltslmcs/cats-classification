@@ -21,6 +21,11 @@ This project is about image classification. More specifically, the aim is to ide
 ```bash
 .
 |── illustrations                           # screenshots
+|── models                                  # models in h5 format
+    |── resnet50_01_0.597.h5
+    |── resnet50_02_0.654.h5
+    |── resnet50_06_0.684.h5
+    |── resnet50_25_0.700.h5
 |── notebooks
     |── notebook.ipynb                      # experiment different CNNs
 |── .gitignore
