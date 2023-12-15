@@ -8,7 +8,8 @@
 - [Repo Structure](#repo-structure)
 - [Dataset](#dataset)
 - [Methodology](#methodology)
-- [How to use the app ?](#)
+- [How to use the app ?](#how-to-use-the-app)
+- [Technologies](#technologies)
 - [Bibliography](#bibliography)
 
 ## Summary
@@ -43,6 +44,13 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 ## How to use the app?
 
 --WIP--
+
+## Technologies
+
+- Python 3
+- Tensorflow
+- Keras
+
 
 ## Bibliography
 
