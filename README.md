@@ -27,10 +27,14 @@ This project is about image classification. More specifically, the aim is to ide
     |── resnet50_02_0.654.h5
     |── resnet50_06_0.684.h5
     |── resnet50_25_0.700.h5
-|── notebooks
-    |── notebook.ipynb                      # experiment different CNNs
+|── notebooks                               # notebook with model training
+    |── notebook.ipynb
+|── scripts                                 # script to train the model
+    |── train_model.py
+|── .gitattributes
 |── .gitignore
-└── README.md
+|── README.md
+└── requirements.txt
 ```
 
 ## Dataset
