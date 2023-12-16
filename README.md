@@ -45,6 +45,15 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 
 --WIP--
 
+```
+import tensorflow as tf
+from tensorflow import keras
+
+model = keras.models.load_model("models/resnet50_25_0.700.h5")
+tf.saved_model.save(model, 'cat-classifier')
+
+```
+
 ## How to use the app?
 
 --WIP--
