@@ -23,10 +23,7 @@ This project is about image classification. More specifically, the aim is to ide
 .
 |── illustrations                           # screenshots
 |── models                                  # models in h5 format
-    |── resnet50_01_0.597.h5
-    |── resnet50_02_0.654.h5
-    |── resnet50_06_0.684.h5
-    |── resnet50_25_0.700.h5
+    |── resnet50_28_0.692.h5
 |── notebooks                               # notebook with model training
     |── notebook.ipynb
 |── scripts                                 # script to train the model
@@ -49,7 +46,7 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 import tensorflow as tf
 from tensorflow import keras
 
-model = keras.models.load_model("models/resnet50_25_0.700.h5")
+model = keras.models.load_model("models/resnet50_28_0.692.h5")
 tf.saved_model.save(model, 'cat-classifier')
 
 ```
@@ -63,6 +60,7 @@ tf.saved_model.save(model, 'cat-classifier')
 - Python 3
 - Tensorflow
 - Keras
+- Streamlit
 
 
 ## Bibliography
