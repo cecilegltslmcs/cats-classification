@@ -40,8 +40,17 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 
 ## Methodology
 
---WIP--
 
+
+*Summary of the different training and tuning*
+|Model | Accuracy | Loss | Time for tuning |
+|------|----------|------|------|
+|Xception | 65.93% | 1.16| 3h42 |
+|ResNet50 | 69.97% | 0.974 | 59 min |
+| EfficientNetB7 | 66.18% | 1.738 | 2h25 |
+
+
+*Transform h5 to files for tensorflow-serving-api*
 ```
 import tensorflow as tf
 from tensorflow import keras
