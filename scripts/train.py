@@ -76,14 +76,14 @@ def make_model(model, learning_rate, droprate, size_inner):
     return model
 
 
-path = "models"
+path = "models/"
 IMG_WIDTH = 224
 IMG_HEIGHT = 224
 CHANNEL = 3
 train_set, val_set = generateDataSet(IMG_WIDTH, IMG_HEIGHT, CHANNEL)
 checkpoint = define_checkpoint(path)
 
-model = make_model(model=ResNet50, learning_rate=0.001, size_inner=1000, droprate=0.0)
+model = make_model(model=ResNet50, learning_rate=0.001, size_inner=50, droprate=0.2)
 history = model.fit(
     train_set, epochs=30, validation_data=val_set, callbacks=[checkpoint]
 )
