@@ -22,4 +22,4 @@ spec:
         - containerPort: 8080
         env:
         - name: TF_SERVING_HOST
-          value: tf-serving-cats-classifier.default.svc.cluster.local:8500
+          value: tf-cats-classifier.default.svc.cluster.local:8500
