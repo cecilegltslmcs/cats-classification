@@ -1,9 +1,9 @@
+import os
 from fastapi import FastAPI, Request, File, UploadFile
 import grpc
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2_grpc
 from keras_image_helper import create_preprocessor
-import os
 from proto import np_to_protobuf
 
 host = os.getenv("TF_SERVING_HOST", "localhost:8500")
@@ -61,19 +61,7 @@ def predict(path):
     return response
 
 
-@app.get("/")
-def home():
-    return "Welcome to the cat classifier"
-
-
 @app.post("/predict")
 async def predict_endpoint(request: Request, file: UploadFile = File(...)):
     result = predict(file.file)
     return result
-
-
-if __name__ == "__main__":
-    # url = 'https://image.petmd.com/files/styles/978x550/public/2023-07/scottish-fold.jpg?w=1080&q=75'
-    # response = predict(url)
-    # print(response)
-    app.run(debug=True, host="0.0.0.0")
