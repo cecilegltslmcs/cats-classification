@@ -1,5 +1,6 @@
 fastapi
 grpcio
 keras-image-helper
+python-multipart
 tensorflow-protobuf
 uvicorn
