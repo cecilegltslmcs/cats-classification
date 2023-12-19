@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tf-serving-cats-classifier
+  name: tf-cats-classifier
 spec:
   selector:
     matchLabels:
-      app: tf-serving-cats-classifier
+      app: tf-cats-classifier
   template:
     metadata:
       labels:
-        app: tf-serving-cats-classifier
+        app: tf-cats-classifier
     spec:
       containers:
-      - name: tf-serving-cats-classifier
-        image: cats-classifier-model:resnet50-v1-001
+      - name: tf-cats-classifier
+        image: cats-classifier-model:001
         resources:
           limits:
             memory: "1024Mi"
