@@ -3,6 +3,9 @@ import streamlit as st
 import pandas as pd
 import requests
 import plotly.express as px
+import os
+
+host = os.getenv("BACKEND_URL", "http://localhost:8000/predict")
 
 # Displaying in head
 st.title("Cat Breeds Classifier")
@@ -16,7 +19,7 @@ uploaded_file = st.file_uploader("Upload your image...", type="jpg")
 if uploaded_file is not None:
     st.image(uploaded_file.getvalue())
     file = {"file": uploaded_file.getvalue()}
-    res = requests.post("http://backend:8080/predict", files=file)
+    res = requests.post(host, timeout=20, files=file)
     res_path = res.json()
     sorted_answer = sorted(res_path.items(), key=lambda x: x[1], reverse=True)
     converted_dict = dict(sorted_answer, index=[0])
