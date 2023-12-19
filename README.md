@@ -100,6 +100,7 @@ Click on the 'Browse files' and you will obtain your predictions.
 - Tensorflow
 - Keras
 - Streamlit
+- FastAPI
 
 
 ## Bibliography
