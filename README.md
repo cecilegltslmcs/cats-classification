@@ -21,11 +21,16 @@ This project is about image classification. More specifically, the aim is to ide
 
 ```bash
 .
+|── api
+    |── backend.py
+    |── frontend.py
+    |── proto.py
 |── illustrations                           # screenshots
 |── models                                  # models in h5 format
     |── resnet50_28_0.692.h5
 |── notebooks                               # notebook with model training
     |── notebook.ipynb
+    |── tf-serving.ipynb
 |── scripts                                 # script to train the model
     |── train_model.py
 |── .gitattributes
@@ -62,7 +67,16 @@ tf.saved_model.save(model, 'cat-classifier')
 
 ## How to use the app?
 
---WIP--
+### Launch locally
+
+- Launch container with Tensorflow serving
+```
+docker run -it --rm \
+  -p 8500:8500 \
+  -v $(pwd)/cats-classifier:/models/cats-classifier/1 \
+  -e MODEL_NAME="cats-classifier" \
+  tensorflow/serving:2.7.0
+```
 
 ## Technologies
 

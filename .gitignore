@@ -1,5 +1,5 @@
 data/
 myenv/
 .pre-commit-config.yaml
-models/cats-classifier
-__pycache__
+cats-classifier
+api/__pycache__
