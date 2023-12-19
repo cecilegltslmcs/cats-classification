@@ -77,6 +77,22 @@ docker run -it --rm \
   -e MODEL_NAME="cats-classifier" \
   tensorflow/serving:2.7.0
 ```
+- Launch with backend only
+
+After launching docker, you can launch the backend alone: `uvicorn backend:app` and go this address `localhost:8000/docs`. You may see this window :
+![Alt text](/illustrations/fastapi-1.png)
+Click on the arrow in the green area. You might see this :
+![Alt text](/illustrations/fastapi-2.png)
+Click on the "Try it out" button and you can submit your pictures.
+![Alt text](/illustrations/fastapi-3.png)
+After submitting your pictures, your predictions appears below.
+![Alt text](/illustrations/fastapi-3.png)
+
+- Launch with backend and frontend
+
+After launching Docker and backend, you can open an other terminal and type : `streamlit run frontend.py`. You may see this window :
+![Alt text](/illustrations/front_streamlit.png)
+Click on the 'Browse files' and you will obtain your predictions.
 
 ## Technologies
 
