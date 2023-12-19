@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request, File, UploadFile
 import grpc
-import tensorflow as tf
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2_grpc
 from keras_image_helper import create_preprocessor
