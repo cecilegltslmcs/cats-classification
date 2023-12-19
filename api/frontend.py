@@ -23,7 +23,11 @@ if uploaded_file is not None:
     answer_df = pd.DataFrame.from_dict(converted_dict, orient="index")
     answer_df.reset_index(inplace=True)
     answer_df.rename(columns={0: "Percentage", "index": "Breed"}, inplace=True)
+    answer_df.drop(index=answer_df.index[-1], axis=0, inplace=True)
     answer_df["Percentage"] = answer_df["Percentage"] * 100
-    st.write("Purr! I'm : ")
-    fig = px.pie(answer_df.head(3), names="Breed", values="Percentage")
+    st.subheader("🐱 Purr! I'm a :")
+    fig = px.pie(answer_df.head(3), names="Breed", labels="Breed", values="Percentage")
+    fig.update_traces(hoverinfo="label+percent", textinfo="label+value")
+
     st.plotly_chart(fig, use_container_width=True)
+    st.dataframe(answer_df)
