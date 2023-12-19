@@ -45,7 +45,7 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 *Summary of the different training and tuning*
 |Model | Accuracy | Loss | Time for tuning |
 |------|----------|------|------|
-|Xception | 65.93% | 1.16| 3h42 |
+|Xception | 65.93% | 1.16| 52 min |
 |ResNet50 | 69.97% | 0.974 | 59 min |
 | EfficientNetB7 | 66.18% | 1.738 | 2h25 |
 

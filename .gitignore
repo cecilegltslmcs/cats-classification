@@ -1,4 +1,4 @@
 data/
 myenv/
 .pre-commit-config.yaml
-api/cat-classifier
+models/cats-classifier
