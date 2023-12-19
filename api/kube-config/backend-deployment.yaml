@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: <Image>
+        image: cats-classifier-backend:001
         resources:
           limits:
             memory: "128Mi"

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: tf-serving-cats-classifier
-        image: <Image>
+        image: cats-classifier-model:resnet50-v1-001
         resources:
           limits:
             memory: "1024Mi"
