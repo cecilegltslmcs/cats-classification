@@ -1,0 +1,5 @@
+fastapi
+grpcio
+keras-image-helper
+tensorflow-protobuf
+uvicorn
