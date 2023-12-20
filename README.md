@@ -1,6 +1,6 @@
 # Cats Classifier
 
-![image](illustrations/cat_banner_readme.avif)
+![image](illustrations/cat_banner_readme.jpg)
 
 ## Table of contents
 
