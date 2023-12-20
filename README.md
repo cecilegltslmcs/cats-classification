@@ -80,7 +80,7 @@ docker run -it --rm \
 - Launch with backend only
 
 After launching docker, you can launch the backend alone: `uvicorn backend:app` and go this address `localhost:8000/docs`. You may see this window :
-<img src="/illustrations/fastapi-1.png" width=400 height=150>
+<img src="/illustrations/fastapi-1.png" width=400 height=300>
 Click on the arrow in the green area. You might see this :
 ![Alt text](/illustrations/fastapi-2.png)
 Click on the "Try it out" button and you can submit your pictures.
