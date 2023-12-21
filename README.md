@@ -60,8 +60,8 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 import tensorflow as tf
 from tensorflow import keras
 
-model = keras.models.load_model("models/resnet50_28_0.692.h5")
-tf.saved_model.save(model, 'cat-classifier')
+model = keras.models.load_model("models/resnet50_30_0.699.h5")
+tf.saved_model.save(model, 'cats-classifier')
 
 ```
 
