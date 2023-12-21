@@ -107,13 +107,20 @@ pip install -r requirements.txt
 
 ## Technologies
 
-- Python 3
-- Tensorflow
-- Keras
-- Streamlit
-- FastAPI
-- Kubernetes
-- Docker
+- To create Computer Vision models:
+    - [Python 3](https://www.python.org/)
+    - [Tensorflow](https://www.tensorflow.org/?hl=fr)
+    - [Keras](https://keras.io/)
+    - [Google Colab](https://colab.google/)
+
+- To create the application:
+    - [FastAPI](https://fastapi.tiangolo.com/)
+    - [Streamlit](https://streamlit.io/)
+
+- To deploy the application and the model:
+    - [Docker](https://www.docker.com/)
+    - [Kubernetes](https://kubernetes.io/)
+    - [Kind](https://kind.sigs.k8s.io/) -> To test locally in a Kubernetes Cluster
 
 
 ## Bibliography
