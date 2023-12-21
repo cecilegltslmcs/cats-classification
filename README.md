@@ -24,17 +24,29 @@ This project is about image classification. More specifically, the aim is to ide
 |── api
     |── backend.py
     |── frontend.py
+    |── image-backend.dockerfile
+    |── image-frontend.dockerfile
     |── proto.py
+    |── requirements-backend.txt
+    |── requirements-frontend.txt
 |── illustrations                           # screenshots
+|── kube-config
+    |── backend-deployment.yaml
+    |── backend-service.yaml
+    |── frontend-deployment.yaml
+    |── front-service.yaml
+    |── model-deployment.yaml
+    |── model-service.yaml
 |── models                                  # models in h5 format
-    |── resnet50_28_0.692.h5
-|── notebooks                               # notebook with model training
+    |── resnet50_30_0.699.h5
+|── notebooks                               # notebook
     |── notebook.ipynb
     |── tf-serving.ipynb
 |── scripts                                 # script to train the model
-    |── train_model.py
+    |── train.py
 |── .gitattributes
 |── .gitignore
+|── image-model.dockerfile
 |── README.md
 └── requirements.txt
 ```
@@ -100,6 +112,8 @@ pip install -r requirements.txt
 - Keras
 - Streamlit
 - FastAPI
+- Kubernetes
+- Docker
 
 
 ## Bibliography
