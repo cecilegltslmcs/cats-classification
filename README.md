@@ -45,8 +45,6 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 
 ## Methodology
 
-
-
 *Summary of the different training and tuning*
 |Model | Accuracy | Loss | Time for tuning |
 |------|----------|------|------|
@@ -69,7 +67,9 @@ tf.saved_model.save(model, 'cats-classifier')
 
 ### Launch locally
 
-- Launch container with Tensorflow serving
+
+
+1) Launch Docker Container with tensorflow/serving
 ```
 docker run -it --rm \
   -p 8500:8500 \
@@ -77,22 +77,23 @@ docker run -it --rm \
   -e MODEL_NAME="cats-classifier" \
   tensorflow/serving:2.7.0
 ```
-- Launch with backend only
 
-After launching docker, you can launch the backend alone: `uvicorn backend:app` and go this address `localhost:8000/docs`. You may see this window :
-![Alt text](/illustrations/fastapi-1.png)
-Click on the arrow in the green area. You might see this :
-![Alt text](/illustrations/fastapi-2.png)
-Click on the "Try it out" button and you can submit your pictures.
-![Alt text](/illustrations/fastapi-3.png)
-After submitting your pictures, your predictions appears below.
-![Alt text](/illustrations/fastapi-3.png)
+2) Launch backend `uvicorn backend:app`. You can submit pictures by using SwaggerUI available on `localhost:8000/docs`
+3) Launch frontend `streamlit run frontend.py`
 
-- Launch with backend and frontend
+These two steps needs to be realised in a virtual environment. The virtual environment uses here is *venv*. Here's an explaination to install it in Linux (Debian/Ubuntu).
+```
+apt install python3.11-venv
 
-After launching Docker and backend, you can open an other terminal and type : `streamlit run frontend.py`. You may see this window :
-![Alt text](/illustrations/front_streamlit.png)
-Click on the 'Browse files' and you will obtain your predictions.
+# go to the folder if not the case
+python3 -m venv <name-of-venv>
+
+source <name-of-env>/bin/activate
+```
+
+This video explains how to launch the "Cats Breeds Classifier" application on your computer.
+[![](http://i3.ytimg.com/vi/Sx3DQ0obns8/hqdefault.jpg)](https://youtu.be/Sx3DQ0obns8)
+
 
 ## Technologies
 
