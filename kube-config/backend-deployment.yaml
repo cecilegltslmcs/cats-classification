@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: backend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -19,7 +20,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         env:
         - name: TF_SERVING_HOST
           value: tf-cats-classifier.default.svc.cluster.local:8500
