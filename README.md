@@ -105,6 +105,18 @@ source <name-of-env>/bin/activate
 pip install -r requirements.txt
 ```
 
+### Launch locally on Kubernetes
+
+1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
+
+2) Create a Kubernetes Cluster `kind create cluster`.
+
+3) Load the three images in the cluster `kind load docker-image <name-of-the-docker-image>:<tag>`.
+
+4) Apply all the deployment and service in the kube-config folder : `kubectl apply -f <kube-manifest>.yaml`
+
+5) Port forward the three pods : `kubectl port-forward service/<service-name> <port>:<port>`
+
 ## Technologies
 
 - To create Computer Vision models:
