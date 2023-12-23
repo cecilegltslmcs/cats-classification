@@ -63,5 +63,5 @@ def predict(path):
 
 @app.post("/predict")
 async def predict_endpoint(request: Request, file: UploadFile = File(...)):
-    result = predict(file.file)
+    result = await predict(file.file)
     return result
