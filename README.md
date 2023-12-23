@@ -66,6 +66,8 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 
 
 *Transform h5 to files for tensorflow-serving-api*
+
+- Open iPython in a terminal
 ```
 import tensorflow as tf
 from tensorflow import keras
