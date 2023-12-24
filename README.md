@@ -35,7 +35,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── backend-service.yaml
     |── deployment.sh
     |── frontend-deployment.yaml
-    |── front-service.yaml
+    |── frontend-service.yaml
     |── model-deployment.yaml
     |── model-service.yaml
 |── models                                  # models in h5 format
@@ -47,6 +47,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── train.py
 |── .gitattributes
 |── .gitignore
+|── docker-build.sh
 |── image-model.dockerfile
 |── README.md
 └── requirements.txt
@@ -110,7 +111,7 @@ pip install -r requirements.txt
 
 ### Launch locally on Kubernetes
 
-1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
+1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*. You can use *docker-build.sh* by doing `./docker-build.sh` to build the Docker images. If not working, change the permission on the script `chmod +x docker-build.sh`.
 
 2) Create a Kubernetes Cluster :
 - with **Kind**: `kind create cluster`
@@ -124,7 +125,7 @@ pip install -r requirements.txt
 
 5) Port forward the three pods : `kubectl port-forward service/<service-name> <port>:<port>`
 
-For steps 2-4, you can use the bash script `deployment.sh`.
+For steps 2-4, you can use the bash script *deployment.sh* by doing `./deployment.sh`. If not working, change the permission on the script `chmod +x deployment.sh`.
 
 ## Technologies
 
