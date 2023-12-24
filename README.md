@@ -22,6 +22,7 @@ This project is about image classification. More specifically, the aim is to ide
 ```bash
 .
 |── api
+    |── __init__.py
     |── backend.py
     |── frontend.py
     |── image-backend.dockerfile
@@ -43,12 +44,20 @@ This project is about image classification. More specifically, the aim is to ide
 |── notebooks                               # notebook
     |── notebook.ipynb
     |── tf-serving.ipynb
-|── scripts                                 # script to train the model
+|── scripts
+    |── __init__.py                              # script to train the model
     |── train.py
+|── tests
+    |── __init__.py                               # script to test different components
+    |── test_backend.py
+    |── test_proto.py
 |── .gitattributes
 |── .gitignore
+|── .gitlab-ci.yml
+|── .pre-commit-config.yaml
 |── docker-build.sh
 |── image-model.dockerfile
+|── proto.py
 |── README.md
 └── requirements.txt
 ```
