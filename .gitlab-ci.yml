@@ -20,9 +20,10 @@ test-job:
     - pip install -r requirements.txt
     - coverage run -m unittest
     - coverage report
+    - coverage xml
   artifacts:
     paths:
-      - coverage_html/
+      - coverage/
 
 deploy-job:
   stage: deploy
