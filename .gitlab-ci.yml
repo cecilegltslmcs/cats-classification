@@ -22,11 +22,11 @@ install-job:
     - apt-get update
     - apt-get install -y python3-pip
     - pip install -r requirements.txt
-    - pip install flake8
 
 lint-job:
   stage: lint
   script:
+    - pip install flake8
     - python3 -m flake8
   dependencies:
     - install-job
