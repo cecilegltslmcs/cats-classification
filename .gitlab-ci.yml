@@ -3,6 +3,7 @@ default:
 
 stages:
   - install
+  - lint
   - test
   - deploy
 
@@ -21,6 +22,14 @@ install-job:
     - apt-get update
     - apt-get install -y python3-pip
     - pip install -r requirements.txt
+    - pip install flake8
+
+lint-job:
+  stage: lint
+  script:
+    - python3 -m flake8
+  dependencies:
+    - install-job
 
 test-job:
   stage: test
