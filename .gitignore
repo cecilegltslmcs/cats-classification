@@ -7,3 +7,4 @@ tests/.coverage
 scripts/__pycache__
 .coverage
 __pycache__
+.pre-commit-config.yaml

@@ -57,7 +57,6 @@ This project is about image classification. More specifically, the aim is to ide
 |── .gitattributes
 |── .gitignore
 |── .gitlab-ci.yml
-|── .pre-commit-config.yaml
 |── build_images.sh
 |── image-model.dockerfile
 |── proto.py
