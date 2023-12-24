@@ -1,4 +1,4 @@
-FROM python:3.11.6-slim@sha256:eb7a9f47cd21f68c04356a841389326a9cefccdd2dbf53ed788b133641af5aa4
+FROM python:3.12-slim@sha256:c127a8c4aca8a5d3ac3a333cbab4c082c7ddbd0891441cc4e30d88dc351f1ce5
 
 EXPOSE 8501
 
