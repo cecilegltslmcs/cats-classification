@@ -1,0 +1,23 @@
+default:
+  image: python:3.12
+  before_script:
+    - apt-get update
+    - apt-get install -y python3-pip
+    - pip install -r requirements.txt
+
+
+build-job:
+  stage: build
+  script:
+    - echo "Beginning of the pipeline."
+
+unit-test:
+  stage: test
+  script:
+    - coverage run -m unittest
+    - coverage report
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Pipeline finished!"
