@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name: backend
 spec:
+  type: LoadBalancer
   selector:
-    type: ClusterIP
     app: backend
   ports:
   - port: 8000
