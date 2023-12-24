@@ -19,7 +19,7 @@ uploaded_file = st.file_uploader("Upload your image...", type="jpg")
 if uploaded_file is not None:
     st.image(uploaded_file.getvalue())
     file = {"file": uploaded_file.getvalue()}
-    res = requests.post(host, timeout=20, files=file)
+    res = requests.post(f"http://{host}/predict", timeout=20, files=file)
     res_path = res.json()
     sorted_answer = sorted(res_path.items(), key=lambda x: x[1], reverse=True)
     converted_dict = dict(sorted_answer, index=[0])
