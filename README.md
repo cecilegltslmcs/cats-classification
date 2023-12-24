@@ -134,7 +134,7 @@ pip install -r requirements.txt
 - To deploy the application and the model:
     - [Docker](https://www.docker.com/)
     - [Kubernetes](https://kubernetes.io/)
-    - [Kind](https://kind.sigs.k8s.io/) -> To test locally in a Kubernetes Cluster
+    - [Kind](https://kind.sigs.k8s.io/) & [Minikube](https://minikube.sigs.k8s.io/docs/start/) -> To test locally in a Kubernetes Cluster
 
 
 ## Bibliography
