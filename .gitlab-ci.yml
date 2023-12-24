@@ -2,7 +2,6 @@ default:
   image: python:3.11
 
 stages:
-  - install
   - test
   - deploy
 
@@ -15,20 +14,13 @@ cache:
     - venv/
     - ~/.cache/pip
 
-install-job:
-  stage: install
-  script:
-    - pip install -r requirements.txt
-
 test-job:
   stage: test
   script:
-    - pip install coverage
+    - pip install -r requirements.txt
     - coverage run -m unittest
     - coverage combine
     - coverage report
-  dependencies:
-    - install-job
   artifacts:
     paths:
       - coverage_html/
