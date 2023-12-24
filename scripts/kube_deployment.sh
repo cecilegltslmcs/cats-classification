@@ -16,7 +16,7 @@ if [ "$distribution" -eq 0 ]; then
     kind load docker-image cats-classifier-frontend:001
     echo "🖼️  Docker images loaded in cluster!"
 elif [ "$distribution" -eq 1 ]; then
-    minikube start --cpus 2
+    minikube start --cpus 4
     echo "📦  Cluster created!"
     echo "🖼️  Loading local images in cluster..."
     minikube image load cats-classifier-model:001
