@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tf-cats-classifier
+  name: model
 spec:
   selector:
     matchLabels:
-      app: tf-cats-classifier
+      app: model
   template:
     metadata:
       labels:
-        app: tf-cats-classifier
+        app: model
     spec:
       containers:
-      - name: tf-cats-classifier
+      - name: model
         image: cats-classifier-model:001
         resources:
           limits:
