@@ -5,6 +5,7 @@ from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2_grpc
 from keras_image_helper import create_preprocessor
 from proto import np_to_protobuf
+import uvicorn
 
 host = os.getenv("TF_SERVING_HOST", "localhost:8500")
 channel = grpc.insecure_channel(host)
@@ -63,5 +64,9 @@ def predict(path):
 
 @app.post("/predict")
 async def predict_endpoint(request: Request, file: UploadFile = File(...)):
-    result = await predict(file.file)
+    result = predict(file.file)
     return result
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
