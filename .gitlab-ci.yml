@@ -1,5 +1,9 @@
 default:
   image: python:3.11
+  before_script:
+    - apt-get update
+    - apt-get install -y python3-pip
+    - pip install -r requirements.txt
 
 build-job:
   stage: build
@@ -9,9 +13,6 @@ build-job:
 test-job:
   stage: unit-test
   script:
-    - apt-get update
-    - apt-get install -y python3-pip
-    - pip install -r requirements.txt
     - coverage run -m unittest
     - coverage report
 
