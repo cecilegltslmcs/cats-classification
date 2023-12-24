@@ -23,6 +23,7 @@ install-job:
 test-job:
   stage: test
   script:
+    - pip install coverage
     - coverage run -m unittest
     - coverage combine
     - coverage report
