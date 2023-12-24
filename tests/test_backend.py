@@ -17,9 +17,8 @@ def test_predict_endpoint():
         "breed1": "Scottish",
         "breed2": "Persian",
     }
-    assert response.json() == expected_response
 
+    assert response.json() == expected_response
     assert "breed1" in response.json()
     assert isinstance(response.json()["breed1"], str) and response.json()["breed1"]
-
     assert set(response.json().keys()) == {"breed1", "breed2"}
