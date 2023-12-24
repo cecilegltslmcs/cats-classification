@@ -44,18 +44,21 @@ This project is about image classification. More specifically, the aim is to ide
 |── notebooks                               # notebook
     |── notebook.ipynb
     |── tf-serving.ipynb
-|── scripts
-    |── __init__.py                              # script to train the model
+|── scripts                                 # script to automate docker & Kubernetes
+    |── build_images.sh
+    |── kube_deployment.sh
+|── scripts_py
+    |── __init__.py                         # script to train the model
     |── train.py
-|── tests
-    |── __init__.py                               # script to test different components
+|── tests                                   # script to test different components
+    |── __init__.py
     |── test_backend.py
     |── test_proto.py
 |── .gitattributes
 |── .gitignore
 |── .gitlab-ci.yml
 |── .pre-commit-config.yaml
-|── docker-build.sh
+|── build_images.sh
 |── image-model.dockerfile
 |── proto.py
 |── README.md
