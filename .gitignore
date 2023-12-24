@@ -2,3 +2,8 @@ data/
 myenv/
 cats-classifier
 api/__pycache__
+tests/__pycache__
+tests/.coverage
+scripts/__pycache__
+.coverage
+__pycache__
