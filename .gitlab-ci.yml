@@ -19,7 +19,6 @@ test-job:
   script:
     - pip install -r requirements.txt
     - coverage run -m unittest
-    - coverage combine
     - coverage report
   artifacts:
     paths:
