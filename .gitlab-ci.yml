@@ -18,15 +18,13 @@ cache:
 install-job:
   stage: install
   script:
-    - apt-get update
-    - apt-get install -y python3-pip
-    - python3 -m pip install --upgrade pip
     - pip install -r requirements.txt
 
 test-job:
   stage: test
   script:
     - coverage run -m unittest
+    - coverage combine
     - coverage report
   dependencies:
     - install-job
