@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import unittest
 import numpy as np
 from tensorflow.core.framework import tensor_pb2, tensor_shape_pb2, types_pb2

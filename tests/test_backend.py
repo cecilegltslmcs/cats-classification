@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from fastapi.testclient import TestClient
 import sys
 import os
