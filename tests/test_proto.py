@@ -1,10 +1,8 @@
 import unittest
 import numpy as np
 from tensorflow.core.framework import tensor_pb2, tensor_shape_pb2, types_pb2
-import sys, os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from api.proto import dtypes_as_dtype, make_tensor_proto, np_to_protobuf
+from proto import dtypes_as_dtype, make_tensor_proto, np_to_protobuf
 
 
 class TestTensorConversion(unittest.TestCase):
