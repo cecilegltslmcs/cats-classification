@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from fastapi.testclient import TestClient
 import sys
@@ -12,14 +13,15 @@ client = TestClient(backend)
 def test_predict_endpoint():
     response = client.post("/predict")
 
-    assert response.status_code == 200
-
     expected_response = {
-        "breed1": "Scottish",
-        "breed2": "Persian",
+        "Scottish Fold": 0.98,
+        "Persian": 0.0001,
+        "Norwegian Forest": 0.1
     }
 
+    assert response.status_code == 200
     assert response.json() == expected_response
-    assert "breed1" in response.json()
-    assert isinstance(response.json()["breed1"], str) and response.json()["breed1"]
-    assert set(response.json().keys()) == {"breed1", "breed2"}
+    assert "Scottish Fold" in response.json()
+    assert isinstance(response.json()["Scottish Fold"], str) and response.json()["Scottish Fold"]
+    assert isinstance(response.json().values(), float)
+
