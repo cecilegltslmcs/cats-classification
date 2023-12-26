@@ -1,15 +1,36 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+"""
+Frontend Module
+
+This module contains functions related to the fetching and the displaying of the
+predictions.
+"""
+
 # import libraries
 import os
+from typing import Union
 import pandas as pd
 import plotly.express as px
 import requests
 import streamlit as st
 
 
-def get_predictions(image_file):
+def get_predictions(image_file: Union[bytes, memoryview]) -> pd.DataFrame:
+    """
+    Takes an images and return a DataFrame with predictions.
+
+    Parameters
+    ----------
+    image_file Union[bytes, memoryview]:
+        Image given by the user.
+
+    Returns
+    -------
+    pd.DataFrame
+        Pandas DataFrame containing breeds with related percentage.
+    """
     backend_url = os.getenv("BACKEND_URL", "http://localhost:8000/predict")
     file = {"file": image_file}
 
@@ -37,6 +58,21 @@ def get_predictions(image_file):
 
 
 def main():
+    """
+    Main function for the Cats Breeds Classifier application.
+
+    This function sets up the Streamlit user interface for uploading a cat image,
+    fetching predictions using the backend API, and displaying the results.
+
+    Usage:
+    1. Run this script.
+    2. Visit the provided Streamlit URL in your web browser.
+    3. Upload a cat picture to obtain its predicted breed.
+
+    The application displays the top three predicted breeds along with their
+    corresponding percentages in a pie chart and a tabular format.
+
+    """
     st.title("Cats Breeds Classifier")
     st.image("https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_960_720.jpg")
     st.text("Upload a cat picture to obtain its breed. Only 20 breeds available.")
@@ -46,7 +82,6 @@ def main():
     if uploaded_file is not None:
         st.image(uploaded_file.getvalue())
 
-        # Get predictions
         predictions = get_predictions(uploaded_file.getvalue())
 
         if predictions is not None:
