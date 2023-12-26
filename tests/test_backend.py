@@ -16,12 +16,14 @@ def test_predict_endpoint():
     expected_response = {
         "Scottish Fold": 0.98,
         "Persian": 0.0001,
-        "Norwegian Forest": 0.1
+        "Norwegian Forest": 0.1,
     }
 
     assert response.status_code == 200
     assert response.json() == expected_response
     assert "Scottish Fold" in response.json()
-    assert isinstance(response.json()["Scottish Fold"], str) and response.json()["Scottish Fold"]
+    assert (
+        isinstance(response.json()["Scottish Fold"], str)
+        and response.json()["Scottish Fold"]
+    )
     assert isinstance(response.json().values(), float)
-

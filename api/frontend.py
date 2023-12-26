@@ -4,8 +4,7 @@
 """
 Frontend Module
 
-This module contains functions related
-to the fetching and the displaying of the
+This module contains functions related to the fetching and the displaying of the
 predictions.
 """
 
