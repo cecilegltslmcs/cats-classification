@@ -8,7 +8,8 @@ cache:
     - venv/
     - ~/.cache/pip
 
-test-job:
+# Python unit tests
+unit test:
   stage: test
   image: python:3.11
   script:
@@ -24,6 +25,7 @@ test-job:
         coverage_format: cobertura
         path: coverage.xml
 
+# Bash Linting
 shell check:
   image: koalaman/shellcheck-alpine:stable
   stage: test
@@ -31,6 +33,15 @@ shell check:
     - shellcheck --version
   script:
     - shellcheck scripts/*.sh
+
+# Bash Formatting
+shfmt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: test
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d scripts/
 
 deploy-job:
   stage: deploy
