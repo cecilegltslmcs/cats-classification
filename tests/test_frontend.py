@@ -1,8 +1,11 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
 import unittest
 from unittest.mock import patch, MagicMock
+import os
+import sys
 import pandas as pd
-import os, sys
 import requests
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -14,6 +17,14 @@ class TestFrontend(unittest.TestCase):
     @patch("streamlit.file_uploader")
     @patch("streamlit.image")
     def test_get_predictions(self, mock_image, mock_file_uploader, mock_requests_post):
+        """
+        Test the get_predictions function.
+
+        This test case checks the behavior of the get_predictions function
+        when provided with mock image data. It ensures that the function returns
+        a DataFrame with the expected structure and that the percentages sum up
+        to 100.
+        """
 
         mock_file_uploader.return_value = MagicMock()
         mock_file_uploader.return_value.getvalue.return_value = b"mock_image_data"
@@ -47,7 +58,7 @@ class TestFrontend(unittest.TestCase):
         self.assertIsInstance(predictions, pd.DataFrame)
         self.assertEqual(len(predictions), 20)
         self.assertEqual(predictions.columns.tolist(), ["Breed", "Percentage"])
-        self.assertAlmostEqual(sum(predictions["Percentage"]), 100.0, places=5)
+        self.assertEqual(sum(predictions["Percentage"]), 100.0)
 
         # Breed names and percentages assertion
         expected_breeds = ["Ragdoll", "Bombay", "American Curl"]
@@ -65,6 +76,13 @@ class TestFrontend(unittest.TestCase):
     def test_get_predictions_exception_handling(
         self, mock_file_uploader, mock_requests_post
     ):
+        """
+        Test the error handling in the get_predictions function.
+
+        This test case checks how the get_predictions function handles an exception
+        when the requests.post call raises a requests.RequestException. It ensures
+        that the function gracefully handles the error scenario and returns None.
+        """
 
         mock_file_uploader.return_value = MagicMock()
         mock_file_uploader.return_value.getvalue.return_value = b"mock_image_data"
