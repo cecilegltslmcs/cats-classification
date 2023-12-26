@@ -7,7 +7,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
-def generateDataSet(IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
+def generateDataSet(PATH, IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
     img_gen = ImageDataGenerator(
         preprocessing_function=preprocess_input,
         rotation_range=50,
@@ -20,7 +20,7 @@ def generateDataSet(IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
     )
 
     train_set = img_gen.flow_from_directory(
-        path,
+        PATH,
         class_mode="sparse",
         subset="training",
         target_size=(IMG_HEIGHT, IMG_WIDTH),
@@ -28,7 +28,7 @@ def generateDataSet(IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
     )
 
     val_set = img_gen.flow_from_directory(
-        path,
+        PATH,
         class_mode="sparse",
         subset="validation",
         target_size=(IMG_HEIGHT, IMG_WIDTH),
@@ -38,9 +38,9 @@ def generateDataSet(IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
     return train_set, val_set
 
 
-def define_checkpoint(path):
+def define_checkpoint():
     checkpoint = keras.callbacks.ModelCheckpoint(
-        f"{path}/resnet50_{epoch:02d}_{val_accuracy:.3f}.h5",
+        "models/resnet50_{epoch:02d}_{val_accuracy:.3f}.h5",
         save_best_only=True,
         monitor="val_accuracy",
         mode="max",
@@ -76,12 +76,12 @@ def make_model(model, learning_rate, droprate, size_inner):
     return model
 
 
-path = "models/"
 IMG_WIDTH = 224
 IMG_HEIGHT = 224
 CHANNEL = 3
-train_set, val_set = generateDataSet(IMG_WIDTH, IMG_HEIGHT, CHANNEL)
-checkpoint = define_checkpoint(path)
+PATH = "dataset"
+train_set, val_set = generateDataSet(PATH, IMG_WIDTH, IMG_HEIGHT, CHANNEL)
+checkpoint = define_checkpoint()
 
 model = make_model(model=ResNet50, learning_rate=0.001, size_inner=50, droprate=0.2)
 history = model.fit(
