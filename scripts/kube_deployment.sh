@@ -19,24 +19,24 @@ read -r distribution
 # Create local cluster and load docker images
 echo "📦  Creating local cluster..."
 if [ "$distribution" -eq 0 ]; then
-    kind create cluster
-    echo "📦  Cluster created!"
-    echo "🖼️  Loading local images in cluster..."
-    kind load docker-image "$model_image"
-    kind load docker-image "$backend_image"
-    kind load docker-image "$frontend_image"
-    echo "🖼️  Docker images loaded in cluster!"
+	kind create cluster
+	echo "📦  Cluster created!"
+	echo "🖼️  Loading local images in cluster..."
+	kind load docker-image "$model_image"
+	kind load docker-image "$backend_image"
+	kind load docker-image "$frontend_image"
+	echo "🖼️  Docker images loaded in cluster!"
 elif [ "$distribution" -eq 1 ]; then
-    minikube start --cpus 4
-    echo "📦  Cluster created!"
-    echo "🖼️  Loading local images in cluster..."
-    minikube image load "$model_image"
-    minikube image load "$backend_image"
-    minikube image load "$frontend_image"
-    echo "🖼️  Docker images loaded in cluster!"
+	minikube start --cpus 4
+	echo "📦  Cluster created!"
+	echo "🖼️  Loading local images in cluster..."
+	minikube image load "$model_image"
+	minikube image load "$backend_image"
+	minikube image load "$frontend_image"
+	echo "🖼️  Docker images loaded in cluster!"
 else
-    echo "🚫  Invalid distribution choice. Exiting..."
-    exit 1
+	echo "🚫  Invalid distribution choice. Exiting..."
+	exit 1
 fi
 
 # Save directory localisation
@@ -45,10 +45,10 @@ kube_config=$(pwd)
 # Create deployments and services
 echo "📟  Launching deployments and services..."
 for file in "$kube_config"/*.yaml; do
-    if [ -f "$file" ]; then
-        echo "📦   Creating resources from file: $file"
-        kubectl apply -f "$file"
-    fi
+	if [ -f "$file" ]; then
+		echo "📦   Creating resources from file: $file"
+		kubectl apply -f "$file"
+	fi
 done
 
 sleep 10
