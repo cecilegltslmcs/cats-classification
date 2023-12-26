@@ -16,13 +16,13 @@ test-job:
     - pip install --upgrade pip
     - coverage run -m unittest
     - coverage report
-    - coverage html
+    - coverage xml
   coverage: '/TOTAL.*\s([.\d]+)%/'
   artifacts:
     reports:
       coverage_report:
         coverage_format: cobertura
-        path: coverage.html
+        path: coverage.xml
 
 deploy-job:
   stage: deploy
