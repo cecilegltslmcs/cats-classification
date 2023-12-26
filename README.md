@@ -21,7 +21,7 @@ This project is about image classification. More specifically, the aim is to ide
 
 ```bash
 .
-|── api
+|── api                                     # scripts related to the serving api
     |── __init__.py
     |── backend.py
     |── frontend.py
@@ -30,7 +30,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── proto.py
     |── requirements-backend.txt
     |── requirements-frontend.txt
-|── illustrations                           # screenshots
+|── illustrations
 |── kube-config
     |── backend-deployment.yaml
     |── backend-service.yaml
@@ -41,23 +41,23 @@ This project is about image classification. More specifically, the aim is to ide
     |── model-service.yaml
 |── models                                  # models in h5 format
     |── resnet50_30_0.699.h5
-|── notebooks                               # notebook
+|── notebooks                               # notebooks
     |── notebook.ipynb
     |── tf-serving.ipynb
-|── scripts                                 # script to automate docker & Kubernetes
+|── scripts                                 # script to automate Docker build & Kubernetes deployment
     |── build_images.sh
     |── kube_deployment.sh
-|── scripts_py
-    |── __init__.py                         # script to train the model
+|── scripts_py                              # script to train the model
+    |── __init__.py
     |── train.py
 |── tests                                   # script to test different components
     |── __init__.py
     |── test_backend.py
+    |── test_frontend.py
     |── test_proto.py
 |── .gitattributes
 |── .gitignore
 |── .gitlab-ci.yml
-|── build_images.sh
 |── image-model.dockerfile
 |── proto.py
 |── README.md
@@ -67,6 +67,8 @@ This project is about image classification. More specifically, the aim is to ide
 ## Dataset
 
 This dataset used comes from Kaggle website. It is available here : [Cat Breeds Refined Dataset](https://www.kaggle.com/datasets/doctrinek/catbreedsrefined-7k).
+To import the dataset in your computer from a notebook:
+```!kaggle datasets download -d doctrinek/catbreedsrefined-7k```
 
 ## Methodology
 
