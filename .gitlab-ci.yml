@@ -1,5 +1,6 @@
 stages:
   - linting
+  - formatting
   - test
   - deploy
 
@@ -9,12 +10,30 @@ cache:
     - venv/
     - ~/.cache/pip
 
+# PYthon Linting
 black:
   stage: linting
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
 
+# Bash Linting
+shell check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: linting
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck scripts/*.sh
+
+# Bash Formatting
+shfmt:
+  image: mvdan/shfmt:v3.2.0-alpine
+  stage: formatting
+  before_script:
+    - shfmt -version
+  script:
+    - shfmt -i 2 -ci -d scripts/
 
 # Python unit tests
 unit test:
@@ -32,24 +51,6 @@ unit test:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
-
-# Bash Linting
-shell check:
-  image: koalaman/shellcheck-alpine:stable
-  stage: linting
-  before_script:
-    - shellcheck --version
-  script:
-    - shellcheck scripts/*.sh
-
-# Bash Formatting
-shfmt:
-  image: mvdan/shfmt:v3.2.0-alpine
-  stage: test
-  before_script:
-    - shfmt -version
-  script:
-    - shfmt -i 2 -ci -d scripts/
 
 deploy-job:
   stage: deploy
