@@ -14,7 +14,7 @@ frontend_image="cats-classifier-frontend:001"
 # Choose tool to create Kubernetes local cluster
 echo "🧰  Choose your tool: "
 echo "0️⃣  Kind | 1️⃣   Minikube"
-read distribution
+read -r distribution
 
 # Create local cluster and load docker images
 echo "📦  Creating local cluster..."
