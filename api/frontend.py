@@ -4,7 +4,8 @@
 """
 Frontend Module
 
-This module contains functions related to the fetching and the displaying of the
+This module contains functions related
+to the fetching and the displaying of the
 predictions.
 """
 
@@ -61,8 +62,9 @@ def main():
     """
     Main function for the Cats Breeds Classifier application.
 
-    This function sets up the Streamlit user interface for uploading a cat image,
-    fetching predictions using the backend API, and displaying the results.
+    This function sets up the Streamlit user interface
+    for uploading a cat image, fetching predictions
+    using the backend API, and displaying the results.
 
     Usage:
     1. Run this script.
@@ -74,8 +76,14 @@ def main():
 
     """
     st.title("Cats Breeds Classifier")
-    st.image("https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_960_720.jpg")
-    st.text("Upload a cat picture to obtain its breed. Only 20 breeds available.")
+    st.image(
+        """https://cdn.pixabay.com/photo/
+    2023/12/08/23/46/cat-8438334_960_720.jpg"""
+    )
+    st.text(
+        """Upload a cat picture to obtain its breed.
+    Only 20 breeds available."""
+    )
 
     uploaded_file = st.file_uploader("Upload your image...", type="jpg")
 
