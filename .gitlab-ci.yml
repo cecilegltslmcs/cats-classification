@@ -24,6 +24,14 @@ test-job:
         coverage_format: cobertura
         path: coverage.xml
 
+shell check:
+  image: koalaman/shellcheck-alpine:stable
+  stage: test
+  before_script:
+    - shellcheck --version
+  script:
+    - shellcheck scripts/*.sh
+
 deploy-job:
   stage: deploy
   script:
