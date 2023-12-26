@@ -1,5 +1,5 @@
 #!/bin/bash
-#Script to deployment in a local cluster with Kind or Kubernetes
+#Script to deploy in a local cluster with Kind or Kubernetes
 
 set -e
 
