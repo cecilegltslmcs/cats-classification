@@ -1,4 +1,5 @@
 stages:
+  - linting
   - test
   - deploy
 
@@ -7,6 +8,13 @@ cache:
   paths:
     - venv/
     - ~/.cache/pip
+
+black:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/black:latest
+  script:
+    - black --check --verbose -- .
+
 
 # Python unit tests
 unit test:
@@ -28,7 +36,7 @@ unit test:
 # Bash Linting
 shell check:
   image: koalaman/shellcheck-alpine:stable
-  stage: test
+  stage: linting
   before_script:
     - shellcheck --version
   script:
