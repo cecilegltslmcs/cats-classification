@@ -99,6 +99,7 @@ tf.saved_model.save(model, 'cats-classifier')
 ### Launch locally
 
 This video explains how to launch the "Cats Breeds Classifier" application on your computer.
+
 [![](http://i3.ytimg.com/vi/Sx3DQ0obns8/hqdefault.jpg)](https://youtu.be/Sx3DQ0obns8)
 
 1) Launch Docker Container with tensorflow/serving
