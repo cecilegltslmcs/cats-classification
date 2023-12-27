@@ -8,7 +8,9 @@
 - [Repo Structure](#repo-structure)
 - [Dataset](#dataset)
 - [Methodology](#methodology)
-- [How to use the app ?](#how-to-use-the-app)
+- [How to use the app?](#how-to-use-the-app)
+    - [Launch locally](#launch-locally)
+    - [Launch locally on Kubernetes](#launch-locally-on-kubernetes)
 - [Technologies](#technologies)
 - [Bibliography](#bibliography)
 
@@ -124,7 +126,8 @@ pip install -r requirements.txt
 
 ### Launch locally on Kubernetes
 
-1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*. You can use *docker-build.sh* by doing `./docker-build.sh` to build the Docker images. If not working, change the permission on the script `chmod +x docker-build.sh`.
+1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
+You can use *docker-build.sh* in the folder *scripts* by doing `./docker-build.sh` to build the Docker images. If not working, change the permission on the script `chmod +x docker-build.sh`.
 
 2) Create a Kubernetes Cluster :
 - with **Kind**: `kind create cluster`
@@ -138,7 +141,7 @@ pip install -r requirements.txt
 
 5) Port forward the three pods : `kubectl port-forward service/<service-name> <port>:<port>`
 
-For steps 2-4, you can use the bash script *deployment.sh* by doing `./deployment.sh`. If not working, change the permission on the script `chmod +x deployment.sh`.
+For steps 2-4, you can use the bash script *deployment.sh* in the folder *scripts* by doing `./deployment.sh`. If not working, change the permission on the script `chmod +x deployment.sh`.
 
 ## Technologies
 
