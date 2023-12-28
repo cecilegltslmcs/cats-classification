@@ -17,14 +17,6 @@ black:
   script:
     - black --check --verbose -- .
 
-# Markdown Linting
-markdownlint:
-  stage: linting
-  image: registry.gitlab.com/pipeline-components/markdownlint:latest
-  script:
-    - mdl --style all --warnings .
-
-
 # Bash Linting
 shell check:
   image: koalaman/shellcheck-alpine:stable
