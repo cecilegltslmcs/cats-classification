@@ -161,6 +161,9 @@ For steps 2-4, you can use the bash script *deployment.sh* in the folder *script
     - [Kubernetes](https://kubernetes.io/)
     - [Kind](https://kind.sigs.k8s.io/) & [Minikube](https://minikube.sigs.k8s.io/docs/start/) -> To test locally in a Kubernetes Cluster
 
+- To build CI/CD and test code:
+    - [GitLab-CI](#https://docs.gitlab.com/ee/ci/) + [Pipeline components](#https://gitlab.com/pipeline-components?page=1)
+    - [Unittest](#https://docs.python.org/3/library/unittest.html)
 
 ## Bibliography
 
