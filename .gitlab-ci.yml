@@ -17,19 +17,12 @@ black:
   script:
     - black --check --verbose -- .
 
-# Dockerfile Linting
-hadolint:
-  stage: linting
-  image: registry.gitlab.com/pipeline-components/hadolint:latest
-  script:
-    - hadolint Dockerfile
-
 # Markdown Linting
-markdown-spellcheck:
+markdownlint:
   stage: linting
-  image: registry.gitlab.com/pipeline-components/markdown-spellcheck:latest
+  image: registry.gitlab.com/pipeline-components/markdownlint:latest
   script:
-    - mdspell --report 'README.md'
+    - mdl --style all --warnings .
 
 
 # Bash Linting
