@@ -10,12 +10,27 @@ cache:
     - venv/
     - ~/.cache/pip
 
-# PYthon Linting
+# Python Linting
 black:
   stage: linting
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
+
+# Dockerfile Linting
+hadolint:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint Dockerfile
+
+# Markdown Linting
+markdown-spellcheck:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/markdown-spellcheck:latest
+  script:
+    - mdspell --report 'README.md'
+
 
 # Bash Linting
 shell check:
