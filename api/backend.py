@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import os
+import logging
 from fastapi import FastAPI, Request, File, UploadFile
 import grpc
 from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2_grpc
 from keras_image_helper import create_preprocessor
-from proto import np_to_protobuf
 import uvicorn
-import logging
+from proto import np_to_protobuf
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -50,12 +50,12 @@ CLASSES = [
 app = FastAPI()
 
 
-def prepare_request(X):
+def prepare_request(image):
     pb_request = predict_pb2.PredictRequest()
     pb_request.model_spec.name = "cats-classifier"
     pb_request.model_spec.signature_name = "serving_default"
 
-    pb_request.inputs["input_2"].CopyFrom(np_to_protobuf(X))
+    pb_request.inputs["input_2"].CopyFrom(np_to_protobuf(image))
 
     return pb_request
 
@@ -67,18 +67,18 @@ def prepare_response(pb_response):
 
 def predict(path):
     try:
-        X = preprocessor.from_path(path)
-        pb_request = prepare_request(X)
+        image = preprocessor.from_path(path)
+        pb_request = prepare_request(image)
         pb_response = stub.Predict(pb_request, timeout=20.0)
         response = prepare_response(pb_response)
         return response
-    except Exception as e:
-        logger.error(f"Prediction failed: {e}")
+    except Exception as error:
+        logger.error("Prediction failed: {%s}", error)
         return {"error": "Prediction failed"}
 
 
 @app.post("/predict")
-async def predict_endpoint(request: Request, file: UploadFile = File(...)):
+async def predict_endpoint(request: Request, file: UploadFile = File(...)) -> dict:
     result = predict(file.file)
     return result
 
