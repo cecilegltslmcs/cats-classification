@@ -7,7 +7,7 @@ from tensorflow.keras.applications.resnet50 import preprocess_input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 
-def generateDataSet(PATH, IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
+def generate_datasets(path, img_height, img_width, batch_size):
     img_gen = ImageDataGenerator(
         preprocessing_function=preprocess_input,
         rotation_range=50,
@@ -19,33 +19,33 @@ def generateDataSet(PATH, IMG_HEIGHT, IMG_WIDTH, BATCH_SIZE):
         fill_mode="nearest",
     )
 
-    train_set = img_gen.flow_from_directory(
-        PATH,
+    train_data = img_gen.flow_from_directory(
+        path,
         class_mode="sparse",
         subset="training",
-        target_size=(IMG_HEIGHT, IMG_WIDTH),
-        batch_size=BATCH_SIZE,
+        target_size=(img_height, img_width),
+        batch_size=batch_size,
     )
 
-    val_set = img_gen.flow_from_directory(
-        PATH,
+    val_data = img_gen.flow_from_directory(
+        path,
         class_mode="sparse",
         subset="validation",
-        target_size=(IMG_HEIGHT, IMG_WIDTH),
-        batch_size=BATCH_SIZE,
+        target_size=(img_height, img_width),
+        batch_size=batch_size,
         shuffle=False,
     )
-    return train_set, val_set
+    return train_data, val_data
 
 
 def define_checkpoint():
-    checkpoint = keras.callbacks.ModelCheckpoint(
+    checkpoint_definition = keras.callbacks.ModelCheckpoint(
         "models/resnet50_{epoch:02d}_{val_accuracy:.3f}.h5",
         save_best_only=True,
         monitor="val_accuracy",
         mode="max",
     )
-    return checkpoint
+    return checkpoint_definition
 
 
 def make_model(model, learning_rate, droprate, size_inner):
@@ -80,10 +80,10 @@ IMG_WIDTH = 224
 IMG_HEIGHT = 224
 CHANNEL = 3
 PATH = "dataset"
-train_set, val_set = generateDataSet(PATH, IMG_WIDTH, IMG_HEIGHT, CHANNEL)
+train_set, val_set = generate_datasets(PATH, IMG_WIDTH, IMG_HEIGHT, CHANNEL)
 checkpoint = define_checkpoint()
 
-model = make_model(model=ResNet50, learning_rate=0.001, size_inner=50, droprate=0.2)
-history = model.fit(
+resnet50 = make_model(model=ResNet50, learning_rate=0.001, size_inner=50, droprate=0.2)
+history = resnet50.fit(
     train_set, epochs=30, validation_data=val_set, callbacks=[checkpoint]
 )
