@@ -77,7 +77,7 @@ To import the dataset in your computer from a notebook: `!kaggle datasets downlo
 
 |Model | Accuracy | Loss | Time for tuning |
 |------|----------|------|------|
-|Xception | 65.93% | 1.16| 52 min |
+|Xception | 65.93% | 1.16 | 52 min |
 |ResNet50 | 69.97% | 0.974 | 59 min |
 | EfficientNetB7 | 66.18% | 1.738 | 2h25 |
 
@@ -109,7 +109,7 @@ docker run -it --rm \
   -p 8500:8500 \
   -v $(pwd)/cats-classifier:/models/cats-classifier/1 \
   -e MODEL_NAME="cats-classifier" \
-  tensorflow/serving:2.7.0
+  tensorflow/serving:2.14.1
 ```
 
 - Launch backend `uvicorn backend:app`. You can submit pictures by using SwaggerUI available on `localhost:8000/docs`.
