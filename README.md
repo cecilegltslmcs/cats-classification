@@ -23,7 +23,7 @@ This project is about image classification. More specifically, the aim is to ide
 
 ```bash
 .
-|── api                                     # scripts related to the serving api
+|── api                                     # components to serve the model
     |── __init__.py
     |── backend.py
     |── frontend.py
@@ -41,7 +41,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── frontend-service.yaml
     |── model-deployment.yaml
     |── model-service.yaml
-|── models                                  # models in h5 format
+|── model                                   # model in h5 format
     |── resnet50_30_0.699.h5
 |── notebooks                               # notebooks
     |── notebook.ipynb
@@ -52,14 +52,14 @@ This project is about image classification. More specifically, the aim is to ide
 |── scripts_py                              # script to train the model
     |── __init__.py
     |── train.py
-|── tests                                   # script to test different components
+|── tests                                   # unit test of the different component
     |── __init__.py
     |── test_backend.py
     |── test_frontend.py
     |── test_proto.py
 |── .gitattributes
 |── .gitignore
-|── .gitlab-ci.yml
+|── .gitlab-ci.yml                          
 |── image-model.dockerfile
 |── proto.py
 |── README.md
@@ -69,8 +69,7 @@ This project is about image classification. More specifically, the aim is to ide
 ## Dataset
 
 This dataset used comes from Kaggle website. It is available here : [Cat Breeds Refined Dataset](https://www.kaggle.com/datasets/doctrinek/catbreedsrefined-7k).
-To import the dataset in your computer from a notebook:
-```!kaggle datasets download -d doctrinek/catbreedsrefined-7k```
+To import the dataset in your computer from a notebook: `!kaggle datasets download -d doctrinek/catbreedsrefined-7k`
 
 ## Methodology
 
@@ -113,19 +112,19 @@ docker run -it --rm \
   tensorflow/serving:2.7.0
 ```
 
-- Launch backend `uvicorn backend:app`. You can submit pictures by using SwaggerUI available on `localhost:8000/docs`
+- Launch backend `uvicorn backend:app`. You can submit pictures by using SwaggerUI available on `localhost:8000/docs`.
 
-- Launch frontend `streamlit run frontend.py`
+- Launch frontend `streamlit run frontend.py`.
 
-These two steps needs to be realised in a virtual environment. The virtual environment uses here is *venv*. Here's an explaination to install it in Linux (Debian/Ubuntu).
+These two steps needs to be realised in a virtual environment. The virtual environment uses here is [venv](https://docs.python.org/3/library/venv.html). Here's a short explaination to install it in Linux (Debian/Ubuntu).
 
 ```bash
 apt install python3.11-venv
 
 # go to the folder if not the case
-python3 -m venv <name-of-venv>
+python3 -m venv <name-of-your-venv>
 
-source <name-of-env>/bin/activate
+source <name-of-your-venv>/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -134,19 +133,19 @@ pip install -r requirements.txt
 - Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
 You can use *docker-build.sh* in the folder *scripts* by doing `./docker-build.sh` to build the Docker images. If not working, change the permission on the script `chmod +x docker-build.sh`.
 
-- Create a Kubernetes Cluster :
+- Create a Kubernetes cluster:
 
   - with **Kind**: `kind create cluster`
-  - with **Minikube**: `minikube start --cpus N` (with N the number of CPUs).
+  - with **Minikube**: `minikube start --cpus N` (with N the number of CPUs; by default in the script N=4).
 
 - Load the three images in the cluster:
 
   - with **Kind**: `kind load docker-image <name-of-the-docker-image>:<tag>`.
   - with **Minikube**: `minikube image load <name-of-the-docker-image>:<tag>`
 
-- Apply all the deployment and service in the kube-config folder : `kubectl apply -f <kube-manifest>.yaml`
+- Apply all the deployment and service in the kube-config folder: `kubectl apply -f <kube-manifest>.yaml`
 
-- Port forward the three pods : `kubectl port-forward service/<service-name> <port>:<port>`
+- Port forward the three pods: `kubectl port-forward service/<service-name> <port>:<port>`
 
 For steps 2-4, you can use the bash script *deployment.sh* in the folder *scripts* by doing `./deployment.sh`. If not working, change the permission on the script `chmod +x deployment.sh`.
 
@@ -165,7 +164,7 @@ For steps 2-4, you can use the bash script *deployment.sh* in the folder *script
 - To deploy the application and the model:
   - [Docker](https://www.docker.com/)
   - [Kubernetes](https://kubernetes.io/)
-  - [Kind](https://kind.sigs.k8s.io/) & [Minikube](https://minikube.sigs.k8s.io/docs/start/) -> To test locally in a Kubernetes Cluster
+  - [Kind](https://kind.sigs.k8s.io/) & [Minikube](https://minikube.sigs.k8s.io/docs/start/) -> To create a local cluster
 
 - To build CI/CD and test code:
   - [GitLab-CI](https://docs.gitlab.com/ee/ci/) + [Pipeline components](https://gitlab.com/pipeline-components?page=1)
@@ -178,7 +177,7 @@ For steps 2-4, you can use the bash script *deployment.sh* in the folder *script
 - [Introduction to Dropout for Regularization](https://machinelearningmastery.com/dropout-for-regularizing-deep-neural-networks/)
 - [How Do Convolutional Layers Work?](https://machinelearningmastery.com/convolutional-layers-for-deep-learning-neural-networks/)
 
-**Optimizer and Loss Functions for multiclasses classification:**
+**Optimizer and Loss Functions for multiclasses classification**:
 
 - [Adam Optimizer for multiclasses classification](https://towardsdatascience.com/multiclass-classification-neural-network-using-adam-optimizer-fb9a4d2f73f4)
 - [Understanding Loss functions for classification](https://medium.com/mlearning-ai/understanding-loss-functions-for-classification-81c19ee72c2a)
@@ -189,6 +188,6 @@ For steps 2-4, you can use the bash script *deployment.sh* in the folder *script
 - [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 - [EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks](https://arxiv.org/abs/1905.11946)
 
-**Keras Tuner:**
+**Keras Tuner**:
 
 - [Introduction to Keras Tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner?hl=en)
