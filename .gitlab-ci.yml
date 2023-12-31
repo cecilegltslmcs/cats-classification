@@ -10,6 +10,16 @@ cache:
     - venv/
     - ~/.cache/pip
 
+# Docker Linting
+hadolint:
+  stage: linting
+  image: registry.gitlab.com/pipeline-components/hadolint:latest
+  script:
+    - hadolint *.dockerfile
+    - cd api
+    - hadolint *.dockerfile
+
+
 # Python Linting
 black:
   stage: linting
