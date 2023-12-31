@@ -1,6 +1,5 @@
 data/
 myenv/
-cats-classifier
 api/__pycache__
 tests/__pycache__
 tests/.coverage
@@ -9,6 +8,7 @@ scripts/__pycache__
 __pycache__
 .pre-commit-config.yaml
 gke-deployment/.terraform
+gke-deployment/.terraform.lock.hcl
 gke-deployment/.terraform.tfstate.lock.info
 gke-deployment/terraform.tfstate.backup
 gke-deployment/terraform.tfstate

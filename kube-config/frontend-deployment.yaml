@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: cats-classifier-frontend:001
+        image: eu.gcr.io/GCP_PROJECT_NAME/my_image_name:001
         resources:
           limits:
             memory: "128Mi"

@@ -3,10 +3,11 @@ stages:
   - linting
   - formatting
   - test
+  - build
   - deploy
 
-before_script:
-  - export GOOGLE_CREDENTIALS=$(echo $BASE64_GOOGLE_CREDENTIALS | base64 -d)
+services:
+  - docker:dind
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -17,6 +18,8 @@ cache:
 # Docker Linting
 hadolint:
   stage: linting
+  only:
+  - main
   image: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
     - hadolint *.dockerfile
@@ -27,6 +30,8 @@ hadolint:
 # Python Linting
 black:
   stage: linting
+  only:
+  - main
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
@@ -35,6 +40,8 @@ black:
 shell check:
   image: koalaman/shellcheck-alpine:stable
   stage: linting
+  only:
+  - main
   before_script:
     - shellcheck --version
   script:
@@ -44,6 +51,8 @@ shell check:
 shfmt:
   image: mvdan/shfmt:v3.2.0-alpine
   stage: formatting
+  only:
+  - main
   before_script:
     - shfmt -version
   script:
@@ -52,6 +61,8 @@ shfmt:
 # Python unit tests
 unit test:
   stage: test
+  only:
+  - main
   image: python:3.11
   script:
     - pip install -r requirements.txt
@@ -66,9 +77,46 @@ unit test:
         coverage_format: cobertura
         path: coverage.xml
 
-deploy-job:
-  stage: deploy
-  script:
-    - echo "Pipeline finished!"
+build Docker images:
+  stage: build
   only:
-    - main
+   - main
+  image: docker:latest
+  before_script:
+   - docker info
+   - echo "$GCLOUD_SERVICE_KEY" > key.json
+   - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
+   - apk add --no-cache --upgrade bash
+  script:
+    - cd scripts/
+    - chmod +x build_images.sh
+    - ./build_images.sh
+
+push Docker images:
+  stage: build
+  only:
+   - main
+  image: docker:latest
+  script:
+    - docker image ls | grep "cats-classifier"
+    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-model:001
+    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-backend:001
+    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-frontend:001
+
+deploy on GCP:
+  stage: deploy
+  only:
+   - main
+  image: google/cloud-sdk
+  before_script:
+    - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
+    - apk add --no-cache --upgrade bash
+  script:
+  - gcloud auth activate-service-account --key-file=$GCLOUD_SERVICE_KEY
+  - gcloud config set project $GCP_PROJECT_NAME
+  - gcloud config set container/cluster cluster-1
+  - gcloud config set compute/zone europe-west1-b
+  - gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone europe-west1-b --project $GCP_PROJECT_NAME
+  - cd scripts
+  - chmod +x deploy.sh
+  - ./deploy.sh

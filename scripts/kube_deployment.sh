@@ -4,7 +4,7 @@
 set -e
 
 # Change to the kube-config directory
-cd ../kube-config
+cd ../kube-config-local
 
 # Define docker images to load in cluster
 model_image="cats-classifier-model:001"

@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: cats-classifier-frontend:001
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "0.5"
+        ports:
+        - containerPort: 8501
+        env:
+        - name: BACKEND_URL
+          value: backend.default.svc.cluster.local:8000

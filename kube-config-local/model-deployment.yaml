@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model
+spec:
+  selector:
+    matchLabels:
+      app: model
+  template:
+    metadata:
+      labels:
+        app: model
+    spec:
+      containers:
+      - name: model
+        image: cats-classifier-model:001
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 8500
