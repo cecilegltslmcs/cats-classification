@@ -23,7 +23,7 @@ This project is about image classification. More specifically, the aim is to ide
 
 ```bash
 .
-|── api                                     # components to serve the model
+|── api                                   # components to serve the model
     |── __init__.py
     |── backend.py
     |── frontend.py
@@ -32,27 +32,40 @@ This project is about image classification. More specifically, the aim is to ide
     |── proto.py
     |── requirements-backend.txt
     |── requirements-frontend.txt
+|── cats-classifier                       # files to serve model with tensorflow-serving-api
+|── gke-deployment                        # Terraform files to create Kubernetes Cluster on GCP
+    |── main.tf
+    |── variables.tf
+    |── output.tf    
 |── illustrations
-|── kube-config
+|── kube-config-local                     # Kubernetes manifests to deploy locally
     |── backend-deployment.yaml
     |── backend-service.yaml
-    |── deployment.sh
     |── frontend-deployment.yaml
     |── frontend-service.yaml
     |── model-deployment.yaml
     |── model-service.yaml
-|── model                                   # model in h5 format
+|── kube-config                           # Kubernetes manifests to deploy on GCP
+    |── backend-deployment.yaml
+    |── backend-service.yaml
+    |── frontend-deployment.yaml
+    |── frontend-service.yaml
+    |── model-deployment.yaml
+    |── model-service.yaml
+|── model                                 # model in h5 format
     |── resnet50_30_0.699.h5
-|── notebooks                               # notebooks
+|── notebooks                             # notebooks
     |── notebook.ipynb
     |── tf-serving.ipynb
-|── scripts                                 # script to automate Docker build & Kubernetes deployment
+|── scripts                               # scripts to automate Docker build & Kubernetes deployment
     |── build_images.sh
+    |── build_images_local.sh
+    |── deploy.sh
     |── kube_deployment.sh
-|── scripts_py                              # script to train the model
+|── scripts_py                            # script to train the model
     |── __init__.py
     |── train.py
-|── tests                                   # unit test of the different component
+|── tests                                 # unit tests of the different component
     |── __init__.py
     |── test_backend.py
     |── test_frontend.py
