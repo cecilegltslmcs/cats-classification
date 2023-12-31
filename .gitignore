@@ -9,3 +9,6 @@ scripts/__pycache__
 __pycache__
 .pre-commit-config.yaml
 gke-deployment/.terraform
+gke-deployment/.terraform.tfstate.lock.info
+gke-deployment/terraform.tfstate.backup
+gke-deployment/terraform.tfstate
