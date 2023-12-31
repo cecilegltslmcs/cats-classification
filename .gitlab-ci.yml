@@ -5,6 +5,9 @@ stages:
   - test
   - deploy
 
+before_script:
+  - export GOOGLE_CREDENTIALS=$(echo $BASE64_GOOGLE_CREDENTIALS | base64 -d)
+
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
