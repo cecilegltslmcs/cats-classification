@@ -102,7 +102,7 @@ To import the dataset in your computer from a notebook: `!kaggle datasets downlo
 import tensorflow as tf
 from tensorflow import keras
 
-model = keras.models.load_model("models/resnet50_30_0.699.h5")
+model = keras.models.load_model("model/resnet50_30_0.699.h5")
 tf.saved_model.save(model, 'cats-classifier')
 
 ```
@@ -144,7 +144,7 @@ pip install -r requirements.txt
 ### Launch locally on Kubernetes
 
 1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
-You can use *docker-build.sh* in the folder *scripts* by doing `./docker-build.sh` to build the Docker images. If not working, change the permission on the script `chmod +x docker-build.sh`.
+You can use *build_images_local.sh* in the folder *scripts* by doing `./build_images_local.sh` to build the Docker images. If not working, change the permission on the script `chmod +x build_images_local.sh`.
 
 2) Create a Kubernetes cluster:
 
@@ -160,7 +160,7 @@ You can use *docker-build.sh* in the folder *scripts* by doing `./docker-build.s
 
 5) Port forward the three pods: `kubectl port-forward service/<service-name> <port>:<port>`
 
-For steps 2-4, you can use the bash script *deployment.sh* in the folder *scripts* by doing `./deployment.sh`. If not working, change the permission on the script `chmod +x deployment.sh`.
+For steps 2-4, you can use the bash script *kube_deployment.sh* in the folder *scripts* by doing `./kube_deployment.sh`. If not working, change the permission on the script `chmod +x kube_deployment.sh`.
 
 ## Technologies
 
