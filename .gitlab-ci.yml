@@ -87,7 +87,7 @@ build Docker images:
    - apk add --no-cache --upgrade docker
    - apk add --no-cache --upgrade curl
    - apk add --no-cache --upgrade bash
-   - apk add --no-cache --upgrade python
+   - apk add --no-cache --upgrade python3
    - curl -sSL https://sdk.cloud.google.com | bash
    - docker info
    - gcloud version
