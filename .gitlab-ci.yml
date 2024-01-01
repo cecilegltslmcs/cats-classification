@@ -20,7 +20,7 @@ cache:
 hadolint:
   stage: linting
   only:
-  - master
+  - main
   image: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
     - hadolint *.dockerfile
@@ -32,7 +32,7 @@ hadolint:
 black:
   stage: linting
   only:
-  - master
+  - main
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
@@ -42,7 +42,7 @@ shell check:
   image: koalaman/shellcheck-alpine:stable
   stage: linting
   only:
-  - master
+  - main
   before_script:
     - shellcheck --version
   script:
@@ -53,7 +53,7 @@ shfmt:
   image: mvdan/shfmt:v3.2.0-alpine
   stage: formatting
   only:
-  - master
+  - main
   before_script:
     - shfmt -version
   script:
@@ -63,7 +63,7 @@ shfmt:
 unit test:
   stage: test
   only:
-  - master
+  - main
   image: python:3.11
   script:
     - pip install -r requirements.txt
