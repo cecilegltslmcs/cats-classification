@@ -89,9 +89,9 @@ build Docker images:
     - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
     - tar zxf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
     - google-cloud-sdk/bin/gcloud --quiet components update
+  script:
     - google-cloud-sdk/bin/gcloud auth configure-docker europe-west1-docker.pkg.dev
     - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
-  script:
     - cd scripts/
     - chmod +x build_images.sh
     - ./build_images.sh
