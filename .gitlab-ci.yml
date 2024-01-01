@@ -82,21 +82,17 @@ build Docker images:
   stage: build
   only:
    - main
-  image: alpine:latest
+  image: docker:latest
   before_script:
-   - apk add --no-cache --upgrade docker
-   - apk add --no-cache --upgrade openrc
-   - rc-update add docker boot
-   - service docker start
-   - apk add --no-cache --upgrade curl
-   - apk add --no-cache --upgrade bash
-   - apk add --no-cache --upgrade python3
-   - curl -sSL https://sdk.cloud.google.com | bash
-   - docker info
-   - gcloud version
-   - echo "$GCLOUD_SERVICE_KEY" > key.json
-   - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
-   - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - apk add --no-cache --upgrade make ca-certificates openssl python bash
+    - update-ca-certificates
+    - echo $GCLOUD_SERVICE_KEY > ${HOME}/key.json
+    - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+    - tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
+    - google-cloud-sdk/bin/gcloud --quiet components update
+    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/key.json
+    - google-cloud-sdk/bin/gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - docker login -u _json_key --password-stdin https://eu.gcr.io < ${HOME}/key.json
   script:
     - cd scripts/
     - chmod +x build_images.sh
