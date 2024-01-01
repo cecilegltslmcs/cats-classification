@@ -1,4 +1,8 @@
-kube_config = ../kube-config
+#!/bin/bash
+
+cd ../kube-config
+
+kube_config=$(pwd)
 
 echo "📟  Launching deployments and services..."
 for file in "$kube_config"/*.yaml; do
