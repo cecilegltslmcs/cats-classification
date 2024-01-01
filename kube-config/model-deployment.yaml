@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: model
-        image: eu.gcr.io/GCP_PROJECT_NAME/my_image_name:001
+        image: eu.gcr.io/cats-breeds-classifier/cats-classier/cats-classifier-model:001
         resources:
           limits:
             memory: "1024Mi"
