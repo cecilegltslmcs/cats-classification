@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: model
-        image: eu.gcr.io/cats-breeds-classifier/cats-classier/cats-classifier-model:001
+        image: europe-west1-docker.pkg.dev/cats-breeds-classifier/cats-classifier/cats-classifier-model:001
         resources:
           limits:
             memory: "1024Mi"
