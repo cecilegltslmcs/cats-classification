@@ -39,3 +39,7 @@ docker tag $frontend_tag $HOST_NAME/$GCP_PROJECT_NAME/$frontend_tag
 
 # Print information about the built Docker images
 docker image ls | grep "cats-classifier"
+
+docker image push $HOST_NAME/$GCP_PROJECT_NAME/$model_tag
+docker image push $HOST_NAME/$GCP_PROJECT_NAME/$backend_tag
+docker image push $HOST_NAME/$GCP_PROJECT_NAME/$frontend_tag

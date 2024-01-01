@@ -20,7 +20,7 @@ cache:
 hadolint:
   stage: linting
   only:
-  - main
+  - master
   image: registry.gitlab.com/pipeline-components/hadolint:latest
   script:
     - hadolint *.dockerfile
@@ -32,7 +32,7 @@ hadolint:
 black:
   stage: linting
   only:
-  - main
+  - master
   image: registry.gitlab.com/pipeline-components/black:latest
   script:
     - black --check --verbose -- .
@@ -42,7 +42,7 @@ shell check:
   image: koalaman/shellcheck-alpine:stable
   stage: linting
   only:
-  - main
+  - master
   before_script:
     - shellcheck --version
   script:
@@ -53,7 +53,7 @@ shfmt:
   image: mvdan/shfmt:v3.2.0-alpine
   stage: formatting
   only:
-  - main
+  - master
   before_script:
     - shfmt -version
   script:
@@ -63,7 +63,7 @@ shfmt:
 unit test:
   stage: test
   only:
-  - main
+  - master
   image: python:3.11
   script:
     - pip install -r requirements.txt
@@ -85,7 +85,7 @@ build Docker images:
   image: alpine:latest
   before_script:
    - apk add --no-cache --upgrade docker
-   - apk add --no-cache --upgrade rc-service
+   - apk add --no-cache --upgrade openrc
    - rc-update add docker
    - apk add --no-cache --upgrade curl
    - apk add --no-cache --upgrade bash
@@ -100,9 +100,6 @@ build Docker images:
     - cd scripts/
     - chmod +x build_images.sh
     - ./build_images.sh
-    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-model:001
-    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-backend:001
-    - docker image push $HOST_NAME/$GCP_PROJECT_NAME/cats-classifier-frontend:001
 
 deploy on GCP:
   stage: deploy
