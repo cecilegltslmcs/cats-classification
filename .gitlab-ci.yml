@@ -4,6 +4,7 @@ stages:
   - formatting
   - test
   - build
+  - push-to-registry
   - deploy
 
 services:
@@ -93,7 +94,7 @@ build Docker images:
     - ./build_images.sh
 
 push Docker images:
-  stage: build
+  stage: push-to-registry
   only:
    - main
   image: docker:latest
