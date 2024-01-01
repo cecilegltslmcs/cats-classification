@@ -84,15 +84,15 @@ build Docker images:
    - main
   image: alpine:latest
   before_script:
-   - apk add docker
-   - apk add curl
+   - apk add --no-cache --upgrade docker
+   - apk add --no-cache --upgrade curl
+   - apk add --no-cache --upgrade bash
    - curl -sSL https://sdk.cloud.google.com | bash
    - docker info
    - gcloud version
    - echo "$GCLOUD_SERVICE_KEY" > key.json
    - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
    - gcloud auth configure-docker europe-west1-docker.pkg.dev
-   - apk add --no-cache --upgrade bash
   script:
     - cd scripts/
     - chmod +x build_images.sh
