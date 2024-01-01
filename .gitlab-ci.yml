@@ -86,7 +86,7 @@ build Docker images:
   before_script:
     - apk add --no-cache --upgrade make ca-certificates openssl python3 bash
     - update-ca-certificates
-    - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/key.json
+    - cat $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/key.json
     - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
     - tar zxf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
     - google-cloud-sdk/bin/gcloud --quiet components update
