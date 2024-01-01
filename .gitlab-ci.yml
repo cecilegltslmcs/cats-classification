@@ -102,13 +102,14 @@ deploy on GCP:
    - main
   image: google/cloud-sdk
   before_script:
-    - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://eu.gcr.io
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
   script:
-  - gcloud auth activate-service-account --key-file=$GCLOUD_SERVICE_KEY
-  - gcloud config set project $GCP_PROJECT_NAME
-  - gcloud config set container/cluster cluster-1
-  - gcloud config set compute/zone europe-west1-b
-  - gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone europe-west1-b --project $GCP_PROJECT_NAME
-  - cd scripts
-  - chmod +x deploy.sh
-  - ./deploy.sh
+    - gcloud auth activate-service-account --key-file=$GCLOUD_SERVICE_KEY
+    - gcloud config set project $GCP_PROJECT_NAME
+    - gcloud config set container/cluster cluster-1
+    - gcloud config set compute/zone europe-west1-b
+    - gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone europe-west1-b --project $GCP_PROJECT_NAME
+    - cd scripts
+    - chmod +x deploy.sh
+    - ./deploy.sh
