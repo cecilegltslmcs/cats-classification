@@ -82,7 +82,7 @@ build Docker images:
   stage: build
   only:
    - main
-  image: alpine:stable
+  image: alpine:latest
   before_script:
    - apk add docker
    - apk add curl
