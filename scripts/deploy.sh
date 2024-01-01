@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../kube-config
+cd ../kube-config || exit
 
 kube_config=$(pwd)
 
