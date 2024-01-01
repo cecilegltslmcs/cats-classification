@@ -85,6 +85,7 @@ build Docker images:
   image: alpine:latest
   before_script:
    - apk add --no-cache --upgrade docker
+   - apk add --no-cache --upgrade rc-service
    - rc-update add docker
    - apk add --no-cache --upgrade curl
    - apk add --no-cache --upgrade bash
