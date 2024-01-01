@@ -90,7 +90,6 @@ build Docker images:
     - tar zxf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
     - google-cloud-sdk/bin/gcloud --quiet components update
     - google-cloud-sdk/bin/gcloud auth configure-docker europe-west1-docker.pkg.dev
-    - cat $GCLOUD_SERVICE_KEY | base64
     - cat $GCLOUD_SERVICE_KEY | docker login -u _json_key --password-stdin https://eu.gcr.io
   script:
     - cd scripts/
