@@ -2,6 +2,10 @@
 
 ![image](illustrations/cat_banner_readme.jpg)
 
+
+[![pipeline status](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/pipeline.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
+[![coverage report](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/coverage.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
+
 ## Table of contents
 
 - [Summary](#summary)
@@ -36,7 +40,7 @@ This project is about image classification. More specifically, the aim is to ide
 |── gke-deployment                        # Terraform files to create Kubernetes Cluster on GCP
     |── main.tf
     |── variables.tf
-    |── output.tf    
+    |── output.tf
 |── illustrations
 |── kube-config-local                     # Kubernetes manifests to deploy locally
     |── backend-deployment.yaml
@@ -72,7 +76,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── test_proto.py
 |── .gitattributes
 |── .gitignore
-|── .gitlab-ci.yml                          
+|── .gitlab-ci.yml
 |── image-model.dockerfile
 |── proto.py
 |── README.md
