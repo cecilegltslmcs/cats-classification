@@ -12,3 +12,4 @@ gcp-deployment/.terraform.lock.hcl
 gcp-deployment/.terraform.tfstate.lock.info
 gcp-deployment/terraform.tfstate.backup
 gcp-deployment/terraform.tfstate
+gcp-deployment/kubeconfig-prod

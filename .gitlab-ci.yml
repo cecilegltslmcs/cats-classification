@@ -81,7 +81,7 @@ unit test:
 build Docker images:
   stage: build
   only:
-   - master
+   - main
   image: docker:latest
   before_script:
     - apk add --no-cache --upgrade make ca-certificates openssl python3 bash
@@ -99,7 +99,7 @@ build Docker images:
 deploy on GCP:
   stage: deploy
   only:
-   - master
+   - main
   image: google/cloud-sdk
   before_script:
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
