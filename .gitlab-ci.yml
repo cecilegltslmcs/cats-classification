@@ -113,3 +113,4 @@ deploy on GCP:
     - cd gcp-deployment/
     - chmod +x deploy.sh
     - ./deploy.sh
+    - echo "Deployment on GCP done! "
