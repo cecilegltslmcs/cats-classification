@@ -2,7 +2,6 @@
 
 ![image](illustrations/cat_banner_readme.jpg)
 
-
 [![pipeline status](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/pipeline.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
 [![coverage report](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/coverage.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
 
@@ -37,7 +36,9 @@ This project is about image classification. More specifically, the aim is to ide
     |── requirements-backend.txt
     |── requirements-frontend.txt
 |── cats-classifier                       # files to serve model with tensorflow-serving-api
-|── gke-deployment                        # Terraform files to create Kubernetes Cluster on GCP
+|── gcp-deployment                        # Terraform files & bash scripts to create Artifact Registry & Kubernetes Cluster on GCP
+    |── build_images.sh
+    |── deploy.sh
     |── main.tf
     |── variables.tf
     |── output.tf
@@ -62,14 +63,12 @@ This project is about image classification. More specifically, the aim is to ide
     |── notebook.ipynb
     |── tf-serving.ipynb
 |── scripts                               # scripts to automate Docker build & Kubernetes deployment
-    |── build_images.sh
     |── build_images_local.sh
-    |── deploy.sh
     |── kube_deployment.sh
 |── scripts_py                            # script to train the model
     |── __init__.py
     |── train.py
-|── tests                                 # unit tests of the different component
+|── tests                                 # unit tests of the different components
     |── __init__.py
     |── test_backend.py
     |── test_frontend.py
