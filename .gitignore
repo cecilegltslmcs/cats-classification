@@ -7,8 +7,8 @@ scripts/__pycache__
 .coverage
 __pycache__
 .pre-commit-config.yaml
-gke-deployment/.terraform
-gke-deployment/.terraform.lock.hcl
-gke-deployment/.terraform.tfstate.lock.info
-gke-deployment/terraform.tfstate.backup
-gke-deployment/terraform.tfstate
+gcp-deployment/.terraform
+gcp-deployment/.terraform.lock.hcl
+gcp-deployment/.terraform.tfstate.lock.info
+gcp-deployment/terraform.tfstate.backup
+gcp-deployment/terraform.tfstate
