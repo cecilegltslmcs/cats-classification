@@ -81,7 +81,7 @@ unit test:
 build Docker images:
   stage: build
   only:
-   - main
+   - master
   image: docker:latest
   before_script:
     - apk add --no-cache --upgrade make ca-certificates openssl python3 bash
@@ -92,14 +92,14 @@ build Docker images:
     - google-cloud-sdk/bin/gcloud auth configure-docker europe-west1-docker.pkg.dev
     - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
   script:
-    - cd scripts/
+    - cd gcp-deployments/
     - chmod +x build_images.sh
     - ./build_images.sh
 
 deploy on GCP:
   stage: deploy
   only:
-   - main
+   - master
   image: google/cloud-sdk
   before_script:
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
@@ -110,6 +110,6 @@ deploy on GCP:
     - gcloud config set container/cluster cluster-1
     - gcloud config set compute/zone europe-west1-b
     - gcloud container clusters get-credentials $GKE_CLUSTER_NAME --zone europe-west1 --project $GCP_PROJECT_NAME
-    - cd scripts
+    - cd gcp-deployments
     - chmod +x deploy.sh
     - ./deploy.sh
