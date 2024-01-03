@@ -76,13 +76,9 @@ def main():
     """
     st.title("Cats Breeds Classifier")
     st.image(
-        """https://cdn.pixabay.com/photo/
-    2023/12/08/23/46/cat-8438334_960_720.jpg"""
+        """https://cdn.pixabay.com/photo/2023/12/08/23/46/cat-8438334_960_720.jpg"""
     )
-    st.text(
-        """Upload a cat picture to obtain its breed.
-    Only 20 breeds available."""
-    )
+    st.text("""Upload a cat picture to obtain its breed. Only 20 breeds available.""")
 
     uploaded_file = st.file_uploader("Upload your image...", type="jpg")
 
