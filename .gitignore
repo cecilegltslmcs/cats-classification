@@ -6,7 +6,6 @@ tests/.coverage
 scripts/__pycache__
 .coverage
 __pycache__
-.pre-commit-config.yaml
 gcp-deployment/.terraform
 gcp-deployment/.terraform.lock.hcl
 gcp-deployment/.terraform.tfstate.lock.info
