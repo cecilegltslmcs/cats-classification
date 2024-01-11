@@ -3,10 +3,6 @@ output "artifact_id" {
   value       = "${google_artifact_registry_repository.repo.id}"
 }
 
-output "gcp_cluster_endpoint" {
-    value = "${google_container_cluster.cluster.endpoint}"
-}
-
 output "cluster_name" {
   description = "Cluster name"
   value       = "${google_container_cluster.cluster.name}"
