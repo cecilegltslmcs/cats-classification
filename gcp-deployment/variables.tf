@@ -14,6 +14,12 @@ variable "region" {
   description = "The region to host the cluster in"
   default     = "europe-west1"
 }
+
+variable "artifact_id"{
+  description = "The name of the artifact registry"
+  default     = "cats-classifier"
+}
+
 variable "network" {
   description = "The VPC network created to host the cluster in"
   default     = "gke-network"
@@ -29,9 +35,4 @@ variable "ip_range_pods_name" {
 variable "ip_range_services_name" {
   description = "The secondary ip range to use for services"
   default     = "ip-range-services"
-}
-
-variable "artifact_id"{
-  description = "The name of the artifact registry"
-  default     = "cats-classifier"
 }

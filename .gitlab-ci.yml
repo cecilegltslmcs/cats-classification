@@ -1,10 +1,10 @@
 ---
 stages:
-  - linting
-  - formatting
+  - lint
+  - format
   - test
+  - create
   - build
-  - push-to-registry
   - deploy
 
 services:
@@ -18,7 +18,7 @@ cache:
 
 # Docker Linting
 hadolint:
-  stage: linting
+  stage: lint
   only:
   - main
   image: registry.gitlab.com/pipeline-components/hadolint:latest
@@ -30,7 +30,7 @@ hadolint:
 
 # Python Linting
 black:
-  stage: linting
+  stage: lint
   only:
   - main
   image: registry.gitlab.com/pipeline-components/black:latest
@@ -40,7 +40,7 @@ black:
 # Bash Linting
 shell check:
   image: koalaman/shellcheck-alpine:stable
-  stage: linting
+  stage: lint
   only:
   - main
   before_script:
@@ -51,7 +51,7 @@ shell check:
 # Bash Formatting
 shfmt:
   image: mvdan/shfmt:v3.2.0-alpine
-  stage: formatting
+  stage: format
   only:
   - main
   before_script:
@@ -78,7 +78,29 @@ unit test:
         coverage_format: cobertura
         path: coverage.xml
 
-build Docker images:
+create resources:
+  stage: create
+  image:
+    name: hashicorp/terraform:light
+    entrypoint:
+      - '/usr/bin/env'
+      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+  before_script:
+    - rm -rf .terraform
+    - terraform --version
+    - cd gcp-deployment/
+    - terraform init
+  only:
+  - main
+  script:
+  - terraform validate
+  - terraform plan -out "planfile"
+  - terraform apply -input=false "planfile"
+  artifacts:
+    paths:
+      - planfile
+
+pull resources on Artifact Registry:
   stage: build
   only:
    - main
@@ -96,7 +118,7 @@ build Docker images:
     - chmod +x build_images.sh
     - ./build_images.sh
 
-deploy on GCP:
+deploy on Kubernetes:
   stage: deploy
   only:
    - main
@@ -113,4 +135,3 @@ deploy on GCP:
     - cd gcp-deployment/
     - chmod +x deploy.sh
     - ./deploy.sh
-    - echo "Deployment on GCP done! "
