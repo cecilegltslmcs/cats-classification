@@ -78,28 +78,6 @@ unit test:
         coverage_format: cobertura
         path: coverage.xml
 
-create resources:
-  stage: create
-  image:
-    name: hashicorp/terraform:light
-    entrypoint:
-      - '/usr/bin/env'
-      - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-  before_script:
-    - rm -rf .terraform
-    - terraform --version
-    - cd gcp-deployment/
-    - terraform init
-  only:
-  - main
-  script:
-  - terraform validate
-  - terraform plan -out "planfile"
-  - terraform apply -input=false "planfile"
-  artifacts:
-    paths:
-      - planfile
-
 pull resources on Artifact Registry:
   stage: build
   only:
