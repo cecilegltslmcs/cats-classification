@@ -96,6 +96,7 @@ create Artifact Registry:
     --async
   - gcloud artifacts repositories describe cats-classifier \
     -- location=europe-west1
+  when: manual
 
 create Kubernetes cluster:
   stage: creation
@@ -108,6 +109,7 @@ create Kubernetes cluster:
   script:
   - gcloud container clusters create-auto cats-classifier-prod \
     --location=europe-west1
+  when: manual
 
 pull resources on Artifact Registry:
   stage: build
@@ -126,6 +128,7 @@ pull resources on Artifact Registry:
     - cd gcp-deployment/
     - chmod +x build_images.sh
     - ./build_images.sh
+  when: manual
 
 deploy on Kubernetes:
   stage: deploy
@@ -144,3 +147,4 @@ deploy on Kubernetes:
     - cd gcp-deployment/
     - chmod +x deploy.sh
     - ./deploy.sh
+  when: manual
