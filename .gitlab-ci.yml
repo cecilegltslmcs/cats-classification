@@ -87,15 +87,8 @@ create Artifact Registry:
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
   script:
-  - gcloud artifacts repositories create cats-classifier \
-    --repository-format=docker \
-    --location=europe-west1 \
-    --description="Docker Repository for cats-classifier" \
-    --kms-key=$GCLOUD_SERVICE_KEY \
-    --immutable-tags \
-    --async
-  - gcloud artifacts repositories describe cats-classifier \
-    -- location=europe-west1
+  - gcloud artifacts repositories create cats-classifier --repository-format=docker --location=europe-west1 --description="Docker Repository for cats-classifier" --kms-key=$GCLOUD_SERVICE_KEY --immutable-tags --async
+  - gcloud artifacts repositories describe cats-classifier -- location=europe-west1
   when: manual
 
 create Kubernetes cluster:
@@ -107,8 +100,7 @@ create Kubernetes cluster:
     - gcloud auth configure-docker europe-west1-docker.pkg.dev
     - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
   script:
-  - gcloud container clusters create-auto cats-classifier-prod \
-    --location=europe-west1
+  - gcloud container clusters create-auto cats-classifier-prod --location=europe-west1
   when: manual
 
 pull resources on Artifact Registry:
