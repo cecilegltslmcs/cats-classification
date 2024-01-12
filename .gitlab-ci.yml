@@ -3,7 +3,7 @@ stages:
   - lint
   - format
   - test
-  - create
+  - creation
   - build
   - deploy
 
@@ -77,6 +77,37 @@ unit test:
       coverage_report:
         coverage_format: cobertura
         path: coverage.xml
+
+create Artifact Registry:
+  stage: creation
+  only:
+  - main
+  image: google/cloud-sdk
+  before_script:
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
+  script:
+  - gcloud artifacts repositories create cats-classifier \
+    --repository-format=docker \
+    --location=europe-west1 \
+    --description="Docker Repository for cats-classifier" \
+    --kms-key=$GCLOUD_SERVICE_KEY \
+    --immutable-tags \
+    --async
+  - gcloud artifacts repositories describe cats-classifier \
+    -- location=europe-west1
+
+create Kubernetes cluster:
+  stage: creation
+  only:
+  - main
+  image: google/cloud-sdk
+  before_script:
+    - gcloud auth configure-docker europe-west1-docker.pkg.dev
+    - cat $GCLOUD_SERVICE_KEY | base64 | docker login -u _json_key_base64 --password-stdin https://europe-west1-docker.pkg.dev
+  script:
+  - gcloud container clusters create-auto cats-classifier-prod \
+    --location=europe-west1
 
 pull resources on Artifact Registry:
   stage: build
