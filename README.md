@@ -97,6 +97,7 @@ For each architecture, Keras Tuner was used to select the best hyperparameters f
 |Xception | 65.93% | 1.16 | 52 min |
 |ResNet50 | 69.97% | 0.974 | 59 min |
 |EfficientNetB7 | 66.18% | 1.738 | 2h25 |
+
 *Table 1: Summary of the performance for each CNN architecture*
 
 Based on these results, the best architecture for our particular dataset is ResNet50. A new model training is performed and checkpointing is used to extract the model with the best accuracy in an h5 format.
