@@ -38,12 +38,6 @@ This project is about image classification. More specifically, the aim is to ide
     |── requirements-backend.txt
     |── requirements-frontend.txt
 |── cats-classifier                       # files to serve model with tensorflow-serving-api
-|── gcp-deployment                        # Terraform files & bash scripts to create Artifact Registry & Kubernetes Cluster on GCP
-    |── build_images.sh
-    |── deploy.sh
-    |── main.tf
-    |── variables.tf
-    |── output.tf
 |── illustrations
 |── kube-config-local                     # Kubernetes manifests to deploy locally
     |── backend-deployment.yaml
@@ -66,6 +60,8 @@ This project is about image classification. More specifically, the aim is to ide
     |── tf-serving.ipynb
 |── scripts                               # scripts to automate Docker build & Kubernetes deployment
     |── build_images_local.sh
+    |── build_images.sh
+    |── deploy.sh
     |── kube_deployment.sh
 |── scripts_py                            # script to train the model
     |── __init__.py
