@@ -13,6 +13,7 @@
 - [Repo Structure](#repo-structure)
 - [Dataset](#dataset)
 - [Methodology](#methodology)
+- [Prerequisites for deployment](#deployment-prerequisites)
 - [How to use the app?](#how-to-use-the-app)
   - [Launch locally](#launch-locally)
   - [Launch locally on Kubernetes](#launch-locally-on-kubernetes)
@@ -22,7 +23,7 @@
 ## Summary
 
 Deep learning algorithms are widely used in various fields, such as computer vision. Computer vision allows the computer to "see" and do things like identify specific objects in an image, or classify images according to their content.
-This project is about image classification. More specifically, the aim is to identify the breed of a cat in an image. To achieve this classifier, Transfer learning will be performed. Among all existing models, three will be explored: Xception, ResNet50 and EfficientNetB7.
+This project is about image classification. More specifically, the aim is to identify the breed of a cat in an image. To achieve this classifier, transfer learning will be used. Among all existing architectures, three will be explored: Xception, ResNet50 and EfficientNetB7.
 
 ## Repo Structure
 
@@ -46,7 +47,7 @@ This project is about image classification. More specifically, the aim is to ide
     |── frontend-service.yaml
     |── model-deployment.yaml
     |── model-service.yaml
-|── kube-config                           # Kubernetes manifests to deploy on GCP
+|── kube-config                           # Kubernetes manifests to deploy on GCP/cloud provider
     |── backend-deployment.yaml
     |── backend-service.yaml
     |── frontend-deployment.yaml
@@ -66,7 +67,7 @@ This project is about image classification. More specifically, the aim is to ide
 |── scripts_py                            # script to train the model
     |── __init__.py
     |── train.py
-|── tests                                 # unit tests of the different components
+|── tests                                 # unit tests for different components
     |── __init__.py
     |── test_backend.py
     |── test_frontend.py
@@ -74,6 +75,7 @@ This project is about image classification. More specifically, the aim is to ide
 |── .gitattributes
 |── .gitignore
 |── .gitlab-ci.yml
+|── .pre-commit-config.yaml
 |── image-model.dockerfile
 |── proto.py
 |── README.md
@@ -83,22 +85,36 @@ This project is about image classification. More specifically, the aim is to ide
 ## Dataset
 
 This dataset used comes from Kaggle website. It is available here : [Cat Breeds Refined Dataset](https://www.kaggle.com/datasets/doctrinek/catbreedsrefined-7k).
-To import the dataset in your computer from a notebook: `!kaggle datasets download -d doctrinek/catbreedsrefined-7k`
+- To import the dataset in a notebook: `!kaggle datasets download -d doctrinek/catbreedsrefined-7k`
 
 ## Methodology
 
-### Summary of the different training and tuning
+In this project, differents architectures are compared in order to select the most efficient. The selected architectures are: Xception, ResNet50 and EfficientNetB7.
+For each architecture, Keras Tuner was used to select the best hyperparameters for each architecture. Accuracy, loss and time for tuning are measured in order to choice the best architecture. The results are shown in the table below.
 
 |Model | Accuracy | Loss | Time for tuning |
 |------|----------|------|------|
 |Xception | 65.93% | 1.16 | 52 min |
 |ResNet50 | 69.97% | 0.974 | 59 min |
-| EfficientNetB7 | 66.18% | 1.738 | 2h25 |
+|EfficientNetB7 | 66.18% | 1.738 | 2h25 |
+*Table 1: Summary of the performance for each CNN architecture*
 
-### Transform h5 to files for tensorflow-serving-api
+Based on these results, the best architecture for our particular dataset is ResNet50. A new model training is performed and checkpointing is used to extract the model with the best accuracy in an h5 format.
 
-- Open iPython in a terminal
+## Deployment prerequisites
 
+- **Software requirements:**
+  - Docker
+  - Kubectl
+  - A local cluster such as *Kind* or *Minikube*
+
+- **Model transformation for serving**
+
+For deployment, we need to transform the h5 files in a folder with different component ready to use by tensorflow serving API. The contents of this folder is going to be import in a Docker container.
+
+1. Open iPython in a terminal
+
+2. Type the following commands:
 ```python
 import tensorflow as tf
 from tensorflow import keras
@@ -111,10 +127,6 @@ tf.saved_model.save(model, 'cats-classifier')
 ## How to use the app?
 
 ### Launch locally
-
-This video explains how to launch the "Cats Breeds Classifier" application on your computer.
-
-[![video-showing-local-launching](http://i3.ytimg.com/vi/Sx3DQ0obns8/hqdefault.jpg)](https://youtu.be/Sx3DQ0obns8)
 
 1) Launch Docker Container with tensorflow/serving
 
@@ -133,7 +145,7 @@ docker run -it --rm \
 These two steps needs to be realised in a virtual environment. The virtual environment uses here is [venv](https://docs.python.org/3/library/venv.html). Here's a short explaination to install it in Linux (Debian/Ubuntu).
 
 ```bash
-apt install python3.11-venv
+apt install python3.xx-venv # replace xx by our Python version
 
 # go to the folder if not the case
 python3 -m venv <name-of-your-venv>
@@ -159,7 +171,7 @@ You can use *build_images_local.sh* in the folder *scripts* by doing `./build_im
 
 4) Apply all the deployment and service in the kube-config folder: `kubectl apply -f <kube-manifest>.yaml`
 
-5) Port forward the three pods: `kubectl port-forward service/<service-name> <port>:<port>`
+5) Port forward the pod containing the frontend image: `kubectl port-forward service/<service-name> <port>:<port>`
 
 For steps 2-4, you can use the bash script *kube_deployment.sh* in the folder *scripts* by doing `./kube_deployment.sh`. If not working, change the permission on the script `chmod +x kube_deployment.sh`.
 
@@ -178,7 +190,6 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
 4) When Docker Images are pulled in Artifact Registry, you can connect to Kubernetes Cluster by using the `gcloud` command give by the platform. After executing this command, you can use the script *deploy.sh* in the folder *scripts*.
 
 5) Execute the command `kubectl port-forward svc/frontend 8501:8501` and launch a browser to the address `localhost:8501` to access to your application.
-
 
 ## Technologies
 
@@ -225,6 +236,9 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
 **Keras Tuner**:
 
 - [Introduction to Keras Tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner?hl=en)
+
+
+[DEPRECATED: This part was finally removed and place in another git branch]
 
 **Deployment Automation**:
 - [Provisioning Kubernetes clusters on GCP with Terraform and GKE](https://learnk8s.io/terraform-gke)
