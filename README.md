@@ -173,9 +173,9 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
 2) Create a Kubernetes Cluster with Google Kubernetes Engine.
 ![Alt text](illustrations/gke_creation.png)
 
-3) Once the different component created on GCP, you can load Docker images in Artifact Registry. To perform that, a bash script can be found in *gcp-deployment* with the name *build_images.sh*.
+3) Once the different component created on GCP, you can load Docker images in Artifact Registry. To perform that, a bash script can be found in *scripts* with the name *build_images.sh*.
 
-4) When Docker Images are pulled in Artifact Registry, you can connect to Kubernetes Cluster by using the `gcloud` command give by the platform. After executing this command, you can use the script *deploy.sh* in the folder *gcp-deployment*.
+4) When Docker Images are pulled in Artifact Registry, you can connect to Kubernetes Cluster by using the `gcloud` command give by the platform. After executing this command, you can use the script *deploy.sh* in the folder *scripts*.
 
 5) Execute the command `kubectl port-forward svc/frontend 8501:8501` and launch a browser to the address `localhost:8501` to access to your application.
 
