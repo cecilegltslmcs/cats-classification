@@ -26,7 +26,6 @@ hadolint:
     - cd api
     - hadolint *.dockerfile
 
-
 # Python Linting
 black:
   stage: lint
