@@ -89,7 +89,7 @@ This dataset used comes from Kaggle website. It is available here : [Cat Breeds 
 
 ## Methodology
 
-In this project, differents architectures are compared in order to select the most efficient. The selected architectures are: Xception, ResNet50 and EfficientNetB7.
+In this project, different architectures are compared in order to select the most efficient. The selected architectures are: Xception, ResNet50 and EfficientNetB7.
 For each architecture, Keras Tuner was used to select the best hyperparameters for each architecture. Accuracy, loss and time for tuning are measured in order to choice the best architecture. The results are shown in the table below.
 
 |Model | Accuracy | Loss | Time for tuning |
@@ -214,7 +214,7 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
 - To automate deployment and test code:
   - [GitLab-CI](https://docs.gitlab.com/ee/ci/) + [Pipeline components](https://gitlab.com/pipeline-components?page=1)
   - [Unittest](https://docs.python.org/3/library/unittest.html)
-  - [Terraform](https://www.terraform.io/)
+  - [Terraform](https://www.terraform.io/) [In another branch]
 
 ## Bibliography
 
