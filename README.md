@@ -155,7 +155,7 @@ source <name-of-your-venv>/bin/activate
 pip install -r requirements.txt
 ```
 
-### Launch locally on Kubernetes
+### Deploy locally with  Kubernetes
 
 1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
 You can use *build_images_local.sh* in the folder *scripts* by doing `./build_images_local.sh` to build the Docker images. If not working, change the permission on the script `chmod +x build_images_local.sh`.
@@ -176,21 +176,27 @@ You can use *build_images_local.sh* in the folder *scripts* by doing `./build_im
 
 For steps 2-4, you can use the bash script *kube_deployment.sh* in the folder *scripts* by doing `./kube_deployment.sh`. If not working, change the permission on the script `chmod +x kube_deployment.sh`.
 
+![Local deployment with Kubernetes](illustrations/local_deploy.png)
+
 ### Launch on Cloud Provider
 
 The chosen cloud provider here is Google Cloud Platform (GCP).
 
 1) Create an Artifact Registry in GCP. This artifact registry will received the Docker Images of our project.
-![Alt text](illustrations/artifact_registry.png)
+![Artifact Registry on GCP](illustrations/artifact_registry.png)
 
 2) Create a Kubernetes Cluster with Google Kubernetes Engine.
-![Alt text](illustrations/gke_creation.png)
+![Google Kubernetes Engine Dashboard](illustrations/gke_creation.png)
 
 3) Once the different component created on GCP, you can load Docker images in Artifact Registry. To perform that, a bash script can be found in *scripts* with the name *build_images.sh*.
 
 4) When Docker Images are pulled in Artifact Registry, you can connect to Kubernetes Cluster by using the `gcloud` command give by the platform. After executing this command, you can use the script *deploy.sh* in the folder *scripts*.
+![CLI for Kubectl settings](illustrations/cli_kubectl.png)
+
 
 5) Execute the command `kubectl port-forward svc/frontend 8501:8501` and launch a browser to the address `localhost:8501` to access to your application.
+![GCP deployment](illustrations/gcp_deploy.png)
+
 
 ## Technologies
 
