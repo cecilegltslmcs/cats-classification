@@ -2,12 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from tensorflow import keras
-from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.applications.resnet50 import preprocess_input
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.applications.resnet50 import ResNet50
+from keras.applications.resnet50 import preprocess_input
+from keras.preprocessing.image import ImageDataGenerator
+from keras.preprocessing.image import DirectoryIterator
 
 
-def generate_datasets(path, img_height, img_width, batch_size):
+def generate_datasets(
+    path: str, img_height: int, img_width: int, batch_size: int
+) -> (DirectoryIterator, DirectoryIterator):
     img_gen = ImageDataGenerator(
         preprocessing_function=preprocess_input,
         rotation_range=50,
@@ -38,7 +41,7 @@ def generate_datasets(path, img_height, img_width, batch_size):
     return train_data, val_data
 
 
-def define_checkpoint():
+def define_checkpoint() -> keras.callbacks.ModelCheckpoint:
     checkpoint_definition = keras.callbacks.ModelCheckpoint(
         "models/resnet50_{epoch:02d}_{val_accuracy:.3f}.h5",
         save_best_only=True,
@@ -48,8 +51,12 @@ def define_checkpoint():
     return checkpoint_definition
 
 
-def make_model(model, learning_rate, droprate, size_inner):
-    base_model = model(weights="imagenet", include_top=False, input_shape=(224, 224, 3))
+def make_model(
+    learning_rate: float, droprate: float, size_inner: int
+) -> keras.applications.resnet50:
+    base_model = ResNet50(
+        weights="imagenet", include_top=False, input_shape=(224, 224, 3)
+    )
 
     base_model.trainable = False
 
@@ -76,14 +83,15 @@ def make_model(model, learning_rate, droprate, size_inner):
     return model
 
 
-IMG_WIDTH = 224
-IMG_HEIGHT = 224
-CHANNEL = 3
-PATH = "dataset"
-train_set, val_set = generate_datasets(PATH, IMG_WIDTH, IMG_HEIGHT, CHANNEL)
-checkpoint = define_checkpoint()
+if __name__ == "__main__":
+    IMG_WIDTH = 224
+    IMG_HEIGHT = 224
+    CHANNEL = 3
+    PATH = "dataset"
+    train_set, val_set = generate_datasets(PATH, IMG_WIDTH, IMG_HEIGHT, CHANNEL)
+    checkpoint = define_checkpoint()
 
-resnet50 = make_model(model=ResNet50, learning_rate=0.001, size_inner=50, droprate=0.2)
-history = resnet50.fit(
-    train_set, epochs=30, validation_data=val_set, callbacks=[checkpoint]
-)
+    resnet50 = make_model(learning_rate=0.001, size_inner=50, droprate=0.2)
+    history = resnet50.fit(
+        train_set, epochs=30, validation_data=val_set, callbacks=[checkpoint]
+    )
