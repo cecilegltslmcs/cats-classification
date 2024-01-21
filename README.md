@@ -2,10 +2,12 @@
 
 ![image](illustrations/cat_banner_readme.jpg)
 
-[![pipeline status](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/pipeline.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
-[![coverage report](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/coverage.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
-
 *Last Update: 21th January 2024*
+
+## General Information
+
+This project was initially hosted in Gitlab. To see the project in Gitlab: [Gitlab - Cats Classification](https://gitlab.com/cecilegltslmcs/cats-classification).
+The notebook with the model training was created in Google Colab.
 
 ## Table of contents
 
@@ -68,15 +70,8 @@ This project is about image classification. More specifically, the aim is to ide
 |── scripts_py                            # script to train the model
     |── __init__.py
     |── train.py
-|── tests                                 # unit tests for different components
-    |── __init__.py
-    |── test_backend.py
-    |── test_frontend.py
-    |── test_proto.py
 |── .gitattributes
 |── .gitignore
-|── .gitlab-ci.yml
-|── .pre-commit-config.yaml
 |── image-model.dockerfile
 |── proto.py
 |── README.md
@@ -220,11 +215,6 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
   - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
   - [Artifact Registry](https://cloud.google.com/artifact-registry?hl=fr)
 
-- To automate deployment and test code:
-  - [GitLab-CI](https://docs.gitlab.com/ee/ci/) + [Pipeline components](https://gitlab.com/pipeline-components?page=1)
-  - [Unittest](https://docs.python.org/3/library/unittest.html)
-  - [Terraform](https://www.terraform.io/) [In another branch]
-
 ## Bibliography
 
 **General**:
@@ -246,10 +236,3 @@ The chosen cloud provider here is Google Cloud Platform (GCP).
 **Keras Tuner**:
 
 - [Introduction to Keras Tuner](https://www.tensorflow.org/tutorials/keras/keras_tuner?hl=en)
-
-
-[DEPRECATED: This part was finally removed and place in another git branch]
-
-**Deployment Automation**:
-- [Provisioning Kubernetes clusters on GCP with Terraform and GKE](https://learnk8s.io/terraform-gke)
-- [Gitlab CI/CD to deploy applications on GKE](https://medium.com/@jaydeepawar4912/gitlab-ci-cd-to-deploy-applications-on-gke-806658160534)
