@@ -5,7 +5,7 @@
 [![pipeline status](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/pipeline.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
 [![coverage report](https://gitlab.com/cecilegltslmcs/cats-classification/badges/main/coverage.svg)](https://gitlab.com/cecilegltslmcs/cats-classification/-/commits/main)
 
-*Last Update: 20th January 2024*
+*Last Update: 21th January 2024*
 
 ## Table of contents
 
@@ -16,7 +16,8 @@
 - [Prerequisites for deployment](#deployment-prerequisites)
 - [How to use the app?](#how-to-use-the-app)
   - [Launch locally](#launch-locally)
-  - [Launch locally on Kubernetes](#launch-locally-on-kubernetes)
+  - [Deploy locally with  Kubernetes](#deploy-locally-on-kubernetes)
+  - [Deploy on Cloud Provider](#deploy-on-cloud-provider)
 - [Technologies](#technologies)
 - [Bibliography](#bibliography)
 
@@ -179,7 +180,7 @@ For steps 2-4, you can use the bash script *kube_deployment.sh* in the folder *s
 
 ![Local deployment with Kubernetes](illustrations/local_deploy.png)
 
-### Launch on Cloud Provider
+### Deploy on Cloud Provider
 
 The chosen cloud provider here is Google Cloud Platform (GCP).
 
