@@ -87,6 +87,7 @@ This project is about image classification. More specifically, the aim is to ide
 
 This dataset used comes from Kaggle website. It is available here : [Cat Breeds Refined Dataset](https://www.kaggle.com/datasets/doctrinek/catbreedsrefined-7k).
 - To import the dataset in a notebook: `!kaggle datasets download -d doctrinek/catbreedsrefined-7k`
+
 This dataset is made up  of 7,000 cat images, divided into 20 breeds. Each breed contains 350 pictures. This limitation on the number of breeds may represent a limit to our project. The breeds in this dataset are as follows: Abyssinian, American Bobtail, American Curl, American Shorthair, Bengal, Birman, Bombay, British Shorthair, Egyptian Mau, Exotic Shorthair, Maine Coon, Manx, Norwegian Forest, Persian, Ragdoll, Russian Blue, Scottish Fold, Siamese, Sphynx and Turkish Angora. For example, one of the most common cats is Domestic Shorthair but it is not included in our data set.
 
 ## Methodology
