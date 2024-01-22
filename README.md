@@ -155,6 +155,10 @@ pip install -r requirements.txt
 
 ### Deploy locally with  Kubernetes
 
+Here a schema illustrating the Kubernetes cluster obtained after deployment.
+![Kubernetes Organization](illustrations/kubernetes_organization.png)
+
+
 1) Build the three Docker images with the files : *image-model.dockerfile*, *image-backend.dockerfile*, *image-frontend.dockerfile*.
 You can use *build_images_local.sh* in the folder *scripts* by doing `./build_images_local.sh` to build the Docker images. If not working, change the permission on the script `chmod +x build_images_local.sh`.
 
