@@ -2,7 +2,7 @@
 
 ![image](illustrations/cat_banner_readme.jpg)
 
-*Last Update: 21th January 2024*
+*Last Update: 22th January 2024*
 
 ## General Information
 
